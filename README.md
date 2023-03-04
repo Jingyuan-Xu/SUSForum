@@ -1,7 +1,5 @@
 # SUSForum
 CS304 - Group 2122 - Project
-# [CS304] Requirement Analysis Report
-
 ---
 
 **Project Member:** 李佩儒，杨家鉴，徐璟源，刘乐奇，黄悦童
