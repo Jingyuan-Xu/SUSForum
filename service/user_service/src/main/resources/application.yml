@@ -1,0 +1,10 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: user
+  profiles:
+    active: dev
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
