@@ -1,4 +1,4 @@
-package com.example.article_service;
+package com.sustech.article_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
