@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8010
 spring:
   application:
     name: user
@@ -22,17 +22,25 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://127.0.0.1:5432/postgres
+      url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
       password: u5398681234QWer
 
-      #配置连接池大小参数
-      initial-size: 15
-      min-idle: 10
-      max-active: 50
+#      #?????????
+#      initial-size: 15
+#      min-idle: 10
+#      max-active: 50
+#
+#      #????????
+#      max-wait: 30000
+#
+#      #????????
+#      min-evictable-idle-time-millis: 30000
 
-      #配置最长等待时间
-      max-wait: 30000
 
-      #连接最小生存时间
-      min-evictable-idle-time-millis: 30000
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      update-strategy: ignored

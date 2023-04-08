@@ -12,11 +12,11 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
-  redis:
-    database: 0
-    host: 123.249.105.74
-    password: sustech-application
-    port: 6379
+#  redis:
+#    database: 0
+#    host: 123.249.105.74
+#    password: sustech-application
+#    port: 6379
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -24,7 +24,7 @@ spring:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/postgres
       username: postgres
-      password: sustech-application
+      password: u5398681234QWer
 
       #?????????
       initial-size: 15
