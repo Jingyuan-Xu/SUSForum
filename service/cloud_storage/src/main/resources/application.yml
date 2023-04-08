@@ -16,9 +16,3 @@ spring:
     multipart:
       max-file-size: 5GB
       max-request-size: 5GB
-
-aliyun:
-  keyid: LTAI5tBpdi38sJNa7iZaKzP7
-  keysecret: sVTw4QTQRJVQOOc5vVQ8ECKN0Iju1G
-  bucketname: opencurve-picture
-  endpoint: oss-cn-shenzhen.aliyuncs.com
