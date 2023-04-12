@@ -25,23 +25,25 @@ public class Topic implements Serializable {
     /**
      * 话题提出者（外键关联t_user）
      */
-    private String user_id;
+    private String userId;
     /**
      * 是否匿名
      */
-    private Boolean is_anonymous;
+    private Boolean isAnonymous;
+
+    private int views;
+
+    private int answers;
+
+    private int likes;
 
     /**
      * 创建时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date gmt_create;
+    private String gmtCreate;
 
     /**
      * 修改时间
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private Date gmt_modified;
-
-    private static final long serialVersionUID = 1L;
+    private String gmtModified;
 }

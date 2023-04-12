@@ -3,8 +3,12 @@ package com.sustech.main_service.service.impl;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.mapper.UserMapper;
 import com.sustech.main_service.service.UserService;
+import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Lynchrocket
@@ -12,27 +16,28 @@ import org.springframework.stereotype.Service;
  * @createDate 2023-04-08 23:26:57
  */
 @Service
-public class UserServiceImpl
-        implements UserService {
-
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserMapper mapper;
-
+    UserMapper userMapper;
 
     @Override
-    public User getByUsername(String username) {
-        return null;
+    public boolean addUser(User user) {
+        String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        user.setGmtCreate(currentTime);
+        user.setGmtModified(currentTime);
+        user.setId(SnowFlake.nextId());
+        return userMapper.addUser(user)>0;
     }
 
     @Override
-    public User getByNickName(String nickName) {
-        return null;
+    public User getByUsername(String username) {
+        return userMapper.getByUsername(username);
     }
 
     @Override
     public boolean reviseInfo(String id, String username, String password, String nick_name, String email, String avatar, String background) {
-        return mapper.revise(id,username,password,nick_name,email,avatar,background)>0;
+        return userMapper.revise(id, username, password, nick_name, email, avatar, background) > 0;
     }
 }
 

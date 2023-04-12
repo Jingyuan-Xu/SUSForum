@@ -1,10 +1,14 @@
 package com.sustech.main_service.service.impl;
 
 import com.sustech.main_service.entity.Topic;
-import com.sustech.main_service.entity.vo.TopicVo;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
+import com.sustech.main_service.utils.SnowFlake;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Lynchrocket
@@ -12,14 +16,17 @@ import org.springframework.stereotype.Service;
  * @createDate 2023-04-08 22:35:49
  */
 @Service
-public class TopicServiceImpl
-        implements TopicService {
+public class TopicServiceImpl implements TopicService {
+    @Autowired
+    TopicMapper topicMapper;
 
-
-    public int addTopicVo(TopicVo topicVo) {
-
-        Topic topic = new Topic();
-        return 0;
+    @Override
+    public boolean addTopic(Topic topic) {
+        String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        topic.setGmtCreate(currentTime);
+        topic.setGmtModified(currentTime);
+        topic.setId(SnowFlake.nextId());
+        return topicMapper.addTopic(topic) > 0;
     }
 }
 

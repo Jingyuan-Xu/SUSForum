@@ -1,6 +1,9 @@
 package com.sustech.main_service.mapper;
 
+import com.sustech.main_service.entity.User;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 /**
@@ -12,10 +15,14 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserMapper {
 
-    @Update("update t_user set username=#{username},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} where id=#{id}")
-    int revise(String id,String username,String password,String nick_name,String email,String avatar,String background);
+    @Insert("INSERT INTO t_user VALUES(#{user.id}, #{user.username}, #{user.password}, #{user.nick_name}, #{user.email}, #{user.avatar}, #{user.role}, #{user.gmt_create}, #{user.modified})")
+    int addUser(User user);
 
+    @Update("UPDATE t_user SET username=#{username},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} where id=#{id}")
+    int revise(String id, String username, String password, String nick_name, String email, String avatar, String background);
 
+    @Select("SELECT * FROM t_user WHERE username=#{username}")
+    User getByUsername(String username);
 
 }
 
