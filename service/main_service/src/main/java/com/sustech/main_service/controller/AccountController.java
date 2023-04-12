@@ -5,6 +5,7 @@ import com.sustech.main_service.entity.User;
 import com.sustech.main_service.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import java.util.Map;
 @Api("用户账户测试模块")
 @RestController
 @RequestMapping("/account")
+@CrossOrigin
 public class AccountController {
     @Autowired
     private UserService userService;
@@ -23,8 +25,13 @@ public class AccountController {
     public Result login(String username, String password) {
         System.out.println("in login");
         User user = userService.getByUsername(username);
-        if (user != null && password.equals(user.getPassword()))
-            return Result.ok().code(200);
+
+        if (user != null && password.equals(user.getPassword())){
+            Map<String,Object> data = new HashMap<>();
+            data.put("id",user.getId());
+            return Result.ok().code(200).data(data);
+        }
+
         return Result.error().message("No such user or invalid username or password");
     }
 
@@ -37,8 +44,7 @@ public class AccountController {
         }
         String msg = "Success to register";
         if (user.getPassword() == null) {
-            user.setPassword("123456");
-            msg = "No password. Provided 123456";
+            return Result.error().code(6000).message("no password");
         }
         user.setNickName(user.getNickName());
         user.setRole(1);
