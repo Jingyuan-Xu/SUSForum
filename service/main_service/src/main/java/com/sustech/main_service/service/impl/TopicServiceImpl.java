@@ -31,12 +31,14 @@ public class TopicServiceImpl implements TopicService {
         return topicMapper.addTopic(topic) > 0;
     }
 
-//    @Override
-//    public List<Topic> getTopicPage(int currentPage, int pageSize) {
-//        int firstIndex = (currentPage - 1) * pageSize;
-//        int lastIndex = currentPage * pageSize;
-//        return topicMapper.getTopicPage(firstIndex, lastIndex);
-//    }
+    @Override
+    public List<Topic> getTopicPage(int currentPage, int pageSize) {
+        if(currentPage <= 0 || pageSize <= 0)
+            return null;
+        int firstIndex = (currentPage - 1) * pageSize;
+        int lastIndex = currentPage * pageSize;
+        return topicMapper.getTopicPage(firstIndex, lastIndex);
+    }
 }
 
 

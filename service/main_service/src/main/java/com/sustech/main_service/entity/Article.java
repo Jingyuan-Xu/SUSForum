@@ -4,12 +4,14 @@ import lombok.Data;
 
 @Data
 public class Article {
-
     String id;
     String title;
     String content;
-    String user_id;
-    boolean is_anonymous;
-    String gmt_create;
-
+    String userId;
+    String tags;
+    String likes;
+    String cover;
+    Boolean isAnonymous;
+    String gmtCreate;
+    String gmtModified;
 }

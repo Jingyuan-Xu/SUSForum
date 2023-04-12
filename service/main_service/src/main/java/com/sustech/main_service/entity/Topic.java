@@ -36,17 +36,17 @@ public class Topic implements Serializable {
     /**
      * 阅览人数
      */
-    private int views;
+    private Integer views;
 
     /**
      * 回答人数
      * */
-    private int answers;
+    private Integer answers;
 
     /**
      * 点赞数
      * */
-    private int likes;
+    private Integer likes;
 
     /**
      * 创建时间

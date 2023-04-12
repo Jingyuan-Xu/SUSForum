@@ -12,5 +12,5 @@ import java.util.List;
 public interface TopicService {
     boolean addTopic(Topic topic);
 
-//    List<Topic> getTopicPage(int currentPage, int pageSize);
+    List<Topic> getTopicPage(int currentPage, int pageSize);
 }
