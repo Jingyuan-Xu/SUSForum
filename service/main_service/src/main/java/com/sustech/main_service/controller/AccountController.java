@@ -20,11 +20,12 @@ public class AccountController {
 
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
-    public Result login(@RequestParam String username, String password) {
+    public Result login(String username, String password) {
+        System.out.println("in login");
         User user = userService.getByUsername(username);
         if (user != null && password.equals(user.getPassword()))
             return Result.ok().code(200);
-        return Result.error();
+        return Result.error().message("No such user or invalid username or password");
     }
 
     @ApiOperation(value = "注册接口")

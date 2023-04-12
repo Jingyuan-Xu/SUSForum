@@ -36,3 +36,20 @@ spring:
 
       #????????
       min-evictable-idle-time-millis: 30000
+
+  # configuration of mail
+  mail:
+    default-encoding: utf-8
+    host: smtp.qq.com
+    username: 873121944@qq.com
+    password: uxzaglnmplnybajh
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+        ssl:
+          enable: true
+        starttls:
+          enable: true
+          required: true
