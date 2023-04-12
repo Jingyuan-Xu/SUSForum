@@ -23,7 +23,6 @@ public class AccountController {
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
     public Result login(String username, String password) {
-        System.out.println("in login");
         User user = userService.getByUsername(username);
 
         if (user != null && password.equals(user.getPassword())){
@@ -37,7 +36,13 @@ public class AccountController {
 
     @ApiOperation(value = "注册接口")
     @PostMapping("register")
-    public Result register(@RequestBody User user) {
+    public Result register(String username, String password, String nick_name, String email) {
+        System.out.println(username+password+nick_name+email);
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setNickName(nick_name);
+        user.setEmail(email);
         User dbUser = userService.getByUsername(user.getUsername());
         if (dbUser != null) {
             return Result.error().message("User exists, please retry again");

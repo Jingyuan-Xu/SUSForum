@@ -1,5 +1,6 @@
 package com.sustech.main_service.service.impl;
 
+import com.alibaba.druid.sql.PagerUtils;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author Lynchrocket
@@ -28,6 +30,13 @@ public class TopicServiceImpl implements TopicService {
         topic.setId(SnowFlake.nextId());
         return topicMapper.addTopic(topic) > 0;
     }
+
+//    @Override
+//    public List<Topic> getTopicPage(int currentPage, int pageSize) {
+//        int firstIndex = (currentPage - 1) * pageSize;
+//        int lastIndex = currentPage * pageSize;
+//        return topicMapper.getTopicPage(firstIndex, lastIndex);
+//    }
 }
 
 

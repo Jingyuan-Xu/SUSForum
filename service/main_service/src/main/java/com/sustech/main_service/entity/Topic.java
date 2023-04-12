@@ -17,6 +17,7 @@ public class Topic implements Serializable {
      * 主键ID
      */
     private String id;
+
     /**
      * 话题标题
      */
@@ -26,15 +27,25 @@ public class Topic implements Serializable {
      * 话题提出者（外键关联t_user）
      */
     private String userId;
+
     /**
      * 是否匿名
      */
     private Boolean isAnonymous;
 
+    /**
+     * 阅览人数
+     */
     private int views;
 
+    /**
+     * 回答人数
+     * */
     private int answers;
 
+    /**
+     * 点赞数
+     * */
     private int likes;
 
     /**

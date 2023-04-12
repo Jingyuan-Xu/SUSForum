@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         user.setGmtCreate(currentTime);
         user.setGmtModified(currentTime);
         user.setId(SnowFlake.nextId());
-        return userMapper.addUser(user)>0;
+        return userMapper.addUser(user) > 0;
     }
 
     @Override

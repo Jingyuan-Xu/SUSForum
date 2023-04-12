@@ -2,6 +2,8 @@ package com.sustech.main_service.service;
 
 import com.sustech.main_service.entity.Topic;
 
+import java.util.List;
+
 /**
  * @author Lynchrocket
  * @description 针对表【t_topic(话题表)】的数据库操作Service
@@ -9,4 +11,6 @@ import com.sustech.main_service.entity.Topic;
  */
 public interface TopicService {
     boolean addTopic(Topic topic);
+
+//    List<Topic> getTopicPage(int currentPage, int pageSize);
 }
