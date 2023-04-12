@@ -1,60 +1,57 @@
 package com.sustech.main_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 用户表
  * @TableName t_user
  */
 @Data
-public class User implements Serializable {
+public class User{
     /**
      * 主键ID
      */
-    private String id;
+    private String id = "";
 
     /**
      * 用户名
      */
-    private String username;
+    private String username = "";
 
     /**
      * 密码
      */
-    private String password;
+    private String password = "";
 
     /**
      * 昵称
      */
-    private String nickName;
+    private String nick_name = "";
 
     /**
      * 邮箱
      */
-    private String email;
+    private String email = "";
 
     /**
      * 头像
      */
-    private String avatar;
+    private String avatar = "";
 
     /**
      * 角色（0管理员、1普通用户）
      */
-    private Integer role;
+    private Integer role = 0;
 
     /**
      * 创建时间
      */
-    private String gmtCreate;
-
+    private String gmt_create = "";
     /**
      * 修改时间
      */
-    private String gmtModified;
+    private String modified = "";
+
+    private String background = "";
 
 }

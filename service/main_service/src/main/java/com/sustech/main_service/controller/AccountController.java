@@ -5,7 +5,6 @@ import com.sustech.main_service.entity.User;
 import com.sustech.main_service.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +18,6 @@ import java.util.Map;
 public class AccountController {
     @Autowired
     private UserService userService;
-
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
     public Result login(String username, String password) {
@@ -41,7 +39,7 @@ public class AccountController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setNickName(nick_name);
+        user.setNick_name(nick_name);
         user.setEmail(email);
         User dbUser = userService.getByUsername(user.getUsername());
         if (dbUser != null) {
@@ -51,7 +49,7 @@ public class AccountController {
         if (user.getPassword() == null) {
             return Result.error().code(6000).message("no password");
         }
-        user.setNickName(user.getNickName());
+        user.setNick_name(user.getNick_name());
         user.setRole(1);
         if (userService.addUser(user)) {
             Map<String, Object> map = new HashMap<>();

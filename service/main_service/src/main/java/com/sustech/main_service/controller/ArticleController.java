@@ -9,10 +9,7 @@ import com.sustech.main_service.utils.SnowFlake;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/article")
+@CrossOrigin
 @Api("文章测试类")
 public class ArticleController {
 
@@ -47,16 +45,24 @@ public class ArticleController {
     }
 
     @ApiOperation("查询文章分页列表")
-    @GetMapping("getPage")
+    @PostMapping("getPage")
     public Result getArticlePage(int currentPage, int pageSize) {
         System.out.println("in getarticle");
         List<Article> articlePage = articleService.getArticlePage(currentPage, pageSize);
-        if (articlePage == null)
+        if (articlePage == null||articlePage.size()==0)
             return Result.error().message("No article");
-        List<Article> articleVoPage = articlePage.stream().peek(x->{
-            User author = userService.getByUserId(x.getId());
-            x.setUserId(author.getNickName());
-        }).collect(Collectors.toList());
+        List<Article> articleVoPage=new ArrayList<>();
+
+        for(Article article:articlePage){
+            User author = userService.getByUserId(article.getUser_id());
+            article.setUser_id(author.getNick_name());
+            articleVoPage.add(article);
+        }
+
+//        List<Article> articleVoPage = articlePage.stream().peek(x->{
+//            User author = userService.getByUserId(x.getUserId());
+//            x.setUserId(author.getNick_name());
+//        }).collect(Collectors.toList());
         Map<String, Object> map = new HashMap<>();
         map.put("data", articleVoPage);
         return Result.ok().code(200).data(map);

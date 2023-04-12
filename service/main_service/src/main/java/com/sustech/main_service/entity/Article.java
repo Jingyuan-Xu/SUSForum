@@ -7,11 +7,11 @@ public class Article {
     String id;
     String title;
     String content;
-    String userId;
+    String user_id;
     String tags;
     String likes;
     String cover;
-    Boolean isAnonymous;
-    String gmtCreate;
-    String gmtModified;
+    Boolean is_anonymous;
+    String gmt_create;
+    String gmt_modified;
 }

@@ -24,26 +24,31 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public boolean saveArticle(String id, String title, String content, String user_id, boolean is_anonymous) {
-        if(getArticle(id).isState()) return false;
+        if (getArticle(id).isState()) return false;
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        return articleMapper.insertArticle(id,title,content,user_id,is_anonymous,currentTime)>0;
+        return articleMapper.insertArticle(id, title, content, user_id, is_anonymous, currentTime) > 0;
     }
 
     @Override
     public Result getArticle(String id) {
         Article article = articleMapper.selectById(id);
-        if(article==null) return Result.error().code(4000).message("no article found");
-        Map<String,Object> data = new HashMap<>();
-        data.put("article",article);
+        if (article == null) return Result.error().code(4000).message("no article found");
+        Map<String, Object> data = new HashMap<>();
+        data.put("article", article);
         return Result.ok().code(200).data(data);
     }
 
     @Override
     public List<Article> getArticlePage(int currentPage, int pageSize) {
-        if(currentPage <= 0 || pageSize <= 0)
+        if (currentPage <= 0 || pageSize <= 0)
             return null;
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
-        return articleMapper.getArticlePage(firstIndex, lastIndex);
+        List<Article> articlePage = articleMapper.getArticlePage(firstIndex, lastIndex);
+        articlePage.stream().peek(x->{
+            if (x.getCover() == null) x.setCover("");
+
+        });
+        return articlePage;
     }
 }

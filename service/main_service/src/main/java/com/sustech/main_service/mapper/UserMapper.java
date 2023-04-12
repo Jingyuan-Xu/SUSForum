@@ -15,7 +15,7 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserMapper {
 
-    @Insert("INSERT INTO t_user VALUES(#{user.id}, #{user.username}, #{user.password}, #{user.nick_name}, #{user.email}, #{user.avatar}, #{user.role}, #{user.gmtCreate}, #{user.gmtMdified})")
+    @Insert("INSERT INTO t_user VALUES(#{id}, #{username}, #{password}, #{nick_name}, #{email}, #{avatar}, #{role}, #{gmt_create}, #{modified},#{background})")
     int addUser(User user);
 
     @Update("UPDATE t_user SET username=#{username},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} where id=#{id}")

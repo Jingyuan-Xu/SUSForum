@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean addUser(User user) {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        user.setGmtCreate(currentTime);
-        user.setGmtModified(currentTime);
+        user.setGmt_create(currentTime);
+        user.setModified(currentTime);
         user.setId(SnowFlake.nextId());
         return userMapper.addUser(user) > 0;
     }

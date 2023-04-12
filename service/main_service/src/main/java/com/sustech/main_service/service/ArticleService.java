@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ArticleService {
 
-    boolean saveArticle(String id, String title,String content,String user_id,boolean is_anonymous);
+    boolean saveArticle(String id, String title, String content, String user_id, boolean is_anonymous);
 
     Result getArticle(String id);
 
