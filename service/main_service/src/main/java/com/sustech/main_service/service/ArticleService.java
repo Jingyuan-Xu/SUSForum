@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface ArticleService {
 
-    boolean saveArticle(String id, String title, String content, String user_id, boolean is_anonymous);
+    boolean saveArticle(Article article);
 
-    Result getArticle(String id);
+    Result getById(String id);
 
     List<Article> getArticlePage(int currentPage, int pageSize);
 }

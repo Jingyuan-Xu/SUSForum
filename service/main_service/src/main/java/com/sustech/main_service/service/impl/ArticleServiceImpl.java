@@ -5,6 +5,7 @@ import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.ArticleMapper;
 import com.sustech.main_service.service.ArticleService;
+import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +24,19 @@ public class ArticleServiceImpl implements ArticleService {
 
 
     @Override
-    public boolean saveArticle(String id, String title, String content, String user_id, boolean is_anonymous) {
-        if (getArticle(id).isState()) return false;
+    public boolean saveArticle(Article article) {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        return articleMapper.insertArticle(id, title, content, user_id, is_anonymous, currentTime) > 0;
+        article.setGmt_create(currentTime);
+        article.setGmt_modified(currentTime);
+        article.setId(SnowFlake.nextId());
+        article.setLikes(0);
+        if (article.getCover() == null) article.setCover("");
+        if (article.getIs_anonymous() == null) article.setIs_anonymous(false);
+        return articleMapper.addArticle(article) > 0;
     }
 
     @Override
-    public Result getArticle(String id) {
+    public Result getById(String id) {
         Article article = articleMapper.selectById(id);
         if (article == null) return Result.error().code(4000).message("no article found");
         Map<String, Object> data = new HashMap<>();
@@ -45,7 +51,7 @@ public class ArticleServiceImpl implements ArticleService {
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
         List<Article> articlePage = articleMapper.getArticlePage(firstIndex, lastIndex);
-        articlePage.stream().peek(x->{
+        articlePage.stream().peek(x -> {
             if (x.getCover() == null) x.setCover("");
 
         });

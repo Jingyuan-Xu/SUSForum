@@ -9,7 +9,7 @@ public class Article {
     String content;
     String user_id;
     String tags;
-    String likes;
+    Integer likes;
     String cover;
     Boolean is_anonymous;
     String gmt_create;

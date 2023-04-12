@@ -50,8 +50,6 @@ public class User{
     /**
      * 修改时间
      */
-    private String modified = "";
-
-    private String background = "";
+    private String gmt_modified = "";
 
 }

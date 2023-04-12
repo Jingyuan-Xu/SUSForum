@@ -12,8 +12,8 @@ import java.util.List;
 @Mapper
 public interface ArticleMapper {
 
-    @Insert("insert into t_article values(#{id},#{title},#{content},#{user_id},#{is_anonymous},#{gmt_create})")
-    int insertArticle(String id, String title, String content, String user_id, boolean is_anonymous, String gmt_create);
+    @Insert("insert into t_article values(#{id},#{title},#{content},#{user_id},#{tags},#{likes},#{cover},#{is_anonymous},#{gmt_create},#{gmt_modified})")
+    int addArticle(Article article);
 
     @Select("select * from t_article where id=#{id}")
     Article selectById(String id);

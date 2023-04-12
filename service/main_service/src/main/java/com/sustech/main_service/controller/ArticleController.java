@@ -31,8 +31,8 @@ public class ArticleController {
 
     @PostMapping("save")
     @ApiOperation("保存文章")
-    public Result saveArticle(String title, String content, String user_id, boolean is_anonymous) {
-        if (articleService.saveArticle(SnowFlake.nextId(), title, content, user_id, is_anonymous)) {
+    public Result saveArticle(Article article) {
+        if (articleService.saveArticle(article)) {
             return Result.ok().code(200);
         }
         return Result.error().code(5000).message("文章已存在");
@@ -41,7 +41,7 @@ public class ArticleController {
     @ApiOperation("查询文章")
     @GetMapping("getById")
     public Result getArticle(String id) {
-        return articleService.getArticle(id);
+        return articleService.getById(id);
     }
 
     @ApiOperation("查询文章分页列表")
