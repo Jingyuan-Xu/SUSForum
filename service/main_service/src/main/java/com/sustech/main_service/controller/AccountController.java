@@ -42,9 +42,12 @@ public class AccountController {
         }
         user.setNickName(user.getNickName());
         user.setRole(1);
-        Map<String, Object> map = new HashMap<>();
-        map.put("data", user);
-        return Result.ok().code(200).message(msg).data(map);
+        if (userService.addUser(user)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("data", user);
+            return Result.ok().code(200).message(msg).data(map);
+        }
+        return Result.error();
     }
 
     @PostMapping("revise")
