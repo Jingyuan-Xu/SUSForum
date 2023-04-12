@@ -19,7 +19,6 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic>
 
 
     public int addTopicVo(TopicVo topicVo) {
-        User dbUser = ;
 
         Topic topic = new Topic();
         return 0;

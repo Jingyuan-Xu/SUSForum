@@ -26,8 +26,6 @@ public class TopicController {
     @ApiOperation(value = "增加话题（以用户的名字而非id）")
     @PostMapping("addTopicVo")
     public Result addTopicVo(@RequestBody TopicVo topicVo) {
-        if (topicService.save(topic))
-            return Result.ok().code(200);
         return Result.error();
     }
 }

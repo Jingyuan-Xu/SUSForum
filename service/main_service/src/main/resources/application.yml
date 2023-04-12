@@ -22,9 +22,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: org.postgresql.Driver
-      url: jdbc:postgresql://127.0.0.1:5432/postgres
+      url: jdbc:postgresql://10.16.4.246:5432/susforum
       username: postgres
-      password: u5398681234QWer
+      password: 123456
 
       #?????????
       initial-size: 15

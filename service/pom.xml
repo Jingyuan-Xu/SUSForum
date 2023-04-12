@@ -13,10 +13,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>article_service</module>
-        <module>topic_service</module>
         <module>cloud_storage</module>
-        <module>user_service</module>
+        <module>main_service</module>
         <module>video_service</module>
     </modules>
 
