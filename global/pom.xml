@@ -54,10 +54,10 @@
 <!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
 <!--            <version>3.1.5</version>-->
 <!--        </dependency>-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.baomidou</groupId>-->
+<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

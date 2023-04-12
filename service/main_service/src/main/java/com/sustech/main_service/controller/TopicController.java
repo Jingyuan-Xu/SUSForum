@@ -18,8 +18,8 @@ public class TopicController {
     @ApiOperation(value = "增加话题")
     @PostMapping("addTopic")
     public Result addTopic(@RequestBody Topic topic) {
-        if (topicService.save(topic))
-            return Result.ok().code(200);
+//        if (topicService.save(topic))
+//            return Result.ok().code(200);
         return Result.error();
     }
 

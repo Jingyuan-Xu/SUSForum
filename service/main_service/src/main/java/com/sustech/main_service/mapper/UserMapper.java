@@ -1,8 +1,7 @@
 package com.sustech.main_service.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sustech.main_service.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 /**
 * @author Lynchrocket
@@ -11,7 +10,12 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.sustech.user_service.entity.User_0
 */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper {
+
+    @Update("update t_user set username=#{username},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} where id=#{id}")
+    int revise(String id,String username,String password,String nick_name,String email,String avatar,String background);
+
+
 
 }
 

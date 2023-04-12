@@ -1,7 +1,5 @@
 package com.sustech.main_service.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -11,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 * @Entity com.example.topic_service.entity.Topic
 */
 @Mapper
-public interface TopicMapper extends BaseMapper<Topic> {
+public interface TopicMapper{
 
 }
 
