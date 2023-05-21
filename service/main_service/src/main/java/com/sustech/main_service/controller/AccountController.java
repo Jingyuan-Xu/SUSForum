@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api("用户账户测试模块")
+@Api(tags = "用户账户测试模块")
 @RestController
 @RequestMapping("/account")
 @CrossOrigin
@@ -23,11 +23,11 @@ public class AccountController {
     @PostMapping("login")
     public Result login(String username, String password) {
         User user = userService.getByUsername(username);
-
-        if (user != null && password.equals(user.getPassword())) {
-            return Result.ok().code(200).data(Map.of("data", user));
+        if (user != null && password.equals(user.getPassword())){
+            Map<String,Object> data = new HashMap<>();
+            data.put("user",user);
+            return Result.ok().code(200).data(data);
         }
-
         return Result.error().message("No such user or invalid username or password");
     }
 

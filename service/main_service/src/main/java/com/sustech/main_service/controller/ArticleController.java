@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/article")
 @CrossOrigin
-@Api("文章测试类")
+@Api(tags = "文章测试类")
 public class ArticleController {
 
     @Autowired
@@ -47,11 +47,10 @@ public class ArticleController {
     @ApiOperation("查询文章")
     @GetMapping("getById")
     public Result getArticle(String id) {
-        Article article = articleService.getByArticleId(id);
-        if (article == null) {
-            return Result.error().code(4000).message("No article found");
-        }
-        return Result.ok().code(200).data(Map.of("article", article));
+        Article article =articleService.getByArticleId(id);
+        Map<String,Object> data = new HashMap<>();
+        data.put("article",article);
+        return Result.ok().code(200).data(data);
     }
 
     @ApiOperation("查询文章分页列表")
@@ -78,7 +77,7 @@ public class ArticleController {
     }
 
     @ApiOperation("查询文章列表")
-    @PostMapping("getAllArticle")
+    @GetMapping("getAllArticle")
     public Result getAllArticle() {
         List<Article> articlePage = articleService.getAllArticle();
         if (articlePage == null || articlePage.size() == 0)
