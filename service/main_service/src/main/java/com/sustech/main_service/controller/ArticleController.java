@@ -31,7 +31,7 @@ public class ArticleController {
 
     @PostMapping("save")
     @ApiOperation("保存文章")
-    public Result saveArticle(String id,String title,String content,String user_id,String cover) {
+    public Result saveArticle(String id, String title, String content, String user_id, String cover) {
         Article article = new Article();
         article.setCover(cover);
         article.setTitle(title);
@@ -100,10 +100,27 @@ public class ArticleController {
         return Result.ok().code(200).data(map);
     }
 
+    @ApiOperation("评论文章")
     @PostMapping("comment")
-    public Result comment(String info,String article_id,String user_id,String path){
-        return articleService.addComment(user_id,article_id,info,path);
+    public Result comment(String info, String articleId, String userId, String path) {
+        return articleService.addComment(userId, articleId, info, path);
     }
 
+    @ApiOperation("点赞文章")
+    @PostMapping("likeArticle")
+    public Result likeArticle(String articleId) {
+        if (articleService.likeArticle(articleId)) {
+            return Result.ok().message("Like increased by 1");
+        }
+        return Result.error().message("Error in like");
+    }
 
+    @ApiOperation("取消点赞")
+    @PostMapping("unlikeArticle")
+    public Result unlikeArticle(String articleId) {
+        if (articleService.unlikeArticle(articleId)) {
+            return Result.ok().message("Like decreased by 1");
+        }
+        return Result.error().message("Error in like");
+    }
 }

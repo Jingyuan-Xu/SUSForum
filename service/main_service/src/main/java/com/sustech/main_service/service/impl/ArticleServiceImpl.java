@@ -54,7 +54,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getUserArticles(String userId) {
         return articleMapper.getUserArticles(userId);
     }
-    
+
     public List<Article> getAllArticle() {
         return articleMapper.getAllArticle();
     }
@@ -64,5 +64,15 @@ public class ArticleServiceImpl implements ArticleService {
         String time = DateUtils.getCurrDate();
         articleMapper.addComment(user_id, article_id, info, path, false, time);
         return Result.ok().code(200);
+    }
+
+    @Override
+    public boolean likeArticle(String articleId) {
+        return articleMapper.likeArticle(articleId) > 0;
+    }
+
+    @Override
+    public boolean unlikeArticle(String articleId) {
+        return articleMapper.unlikeArticle(articleId) > 0;
     }
 }

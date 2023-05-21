@@ -5,6 +5,7 @@ import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,4 +30,8 @@ public interface ArticleMapper {
     @Insert("insert into t_article_comment(content,article_id,path,user_id,is_anonymous,gmt_create) values(#{content},#{article_id},#{path},#{user_id},#{is_anonymous},#{gmt_create})")
     int addComment(String user_id,String article_id,String content,String path,boolean is_anonymous,String gmt_create);
 
+    @Update("UPDATE t_article SET likes=likes+1 WHERE id=#{articleId}")
+    int likeArticle(String articleId);
+    @Update("UPDATE t_article SET likes=likes-1 WHERE id=#{articleId}")
+    int unlikeArticle(String articleId);
 }
