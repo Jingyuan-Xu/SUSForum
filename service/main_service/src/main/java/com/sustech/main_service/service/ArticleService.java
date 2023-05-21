@@ -19,4 +19,8 @@ public interface ArticleService {
     List<Article> getAllArticle();
 
     Result addComment(String user_id,String article_id,String info,String path);
+
+    boolean likeArticle(String articleId);
+
+    boolean unlikeArticle(String articleId);
 }
