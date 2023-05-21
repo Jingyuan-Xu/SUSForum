@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Comment {
-    String id;
+    Integer id;
     String content;
     String topicId;
     String path;
