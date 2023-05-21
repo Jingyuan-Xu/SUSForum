@@ -47,8 +47,11 @@ public class ArticleController {
     @ApiOperation("查询文章")
     @GetMapping("getById")
     public Result getArticle(String id) {
-        System.out.println(id);
-        return articleService.getById(id);
+        Article article = articleService.getByArticleId(id);
+        if (article == null) {
+            return Result.error().code(4000).message("No article found");
+        }
+        return Result.ok().code(200).data(Map.of("article", article));
     }
 
     @ApiOperation("查询文章分页列表")

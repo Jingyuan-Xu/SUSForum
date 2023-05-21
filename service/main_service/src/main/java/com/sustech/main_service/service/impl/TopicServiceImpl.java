@@ -33,6 +33,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public Topic getByTopicId(String id) {
+        return topicMapper.getByTopicId(id);
+    }
+
+    @Override
     public List<Topic> getTopicPage(int currentPage, int pageSize) {
         if(currentPage <= 0 || pageSize <= 0)
             return null;

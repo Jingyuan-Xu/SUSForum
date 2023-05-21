@@ -25,9 +25,7 @@ public class AccountController {
         User user = userService.getByUsername(username);
 
         if (user != null && password.equals(user.getPassword())) {
-            Map<String, Object> data = new HashMap<>();
-            data.put("id", user.getId());
-            return Result.ok().code(200).data(data);
+            return Result.ok().code(200).data(Map.of("id", user.getId()));
         }
 
         return Result.error().message("No such user or invalid username or password");
