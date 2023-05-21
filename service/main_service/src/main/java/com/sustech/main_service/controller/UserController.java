@@ -2,10 +2,13 @@ package com.sustech.main_service.controller;
 
 import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
+import com.sustech.main_service.entity.Comment;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.entity.User;
+import com.sustech.main_service.mapper.CommentMapper;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.ArticleService;
+import com.sustech.main_service.service.CommentService;
 import com.sustech.main_service.service.TopicService;
 import com.sustech.main_service.service.UserService;
 import io.swagger.annotations.Api;
@@ -31,6 +34,9 @@ public class UserController {
 
     @Autowired
     private TopicService topicService;
+
+    @Autowired
+    private CommentService commentService;
 
     @ApiOperation(value = "获取用户所有数据")
     @GetMapping("getUserData")
@@ -82,17 +88,17 @@ public class UserController {
         return Result.ok().code(200).data(Map.of("data", topicList));
     }
 
-    @ApiOperation(value = "返回用户话题")
-    @GetMapping("getUserTopics")
-    public Result getUserTopics(String userId) {
+    @ApiOperation(value = "返回用户评论")
+    @GetMapping("getUserComments")
+    public Result getUserComments(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
         }
-        List<Topic> topicList = topicService.getUserTopics(userId);
-        if (topicList == null) {
-            return Result.error().message("No such user topics");
+        List<Comment> commentList = commentService.getUserComments(userId);
+        if (commentList == null) {
+            return Result.error().message("No such user comments");
         }
-        return Result.ok().code(200).data(Map.of("data", topicList));
+        return Result.ok().code(200).data(Map.of("data", commentList));
     }
 }
