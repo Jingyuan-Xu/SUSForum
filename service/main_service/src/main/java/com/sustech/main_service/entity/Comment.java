@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class Comment {
-    String id;
+    Integer id;
     String content;
-    String topic_id;
+    String topicId;
     String path;
-    String user_id;
+    String userId;
     Integer likes;
-    Boolean is_anonymous;
-    String gmt_create;
-    String gmt_modified;
+    Boolean isAnonymous;
+    String gmtCreate;
+    String gmtModified;
 }

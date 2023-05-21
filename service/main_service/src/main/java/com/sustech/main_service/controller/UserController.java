@@ -5,8 +5,6 @@ import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Comment;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.entity.User;
-import com.sustech.main_service.mapper.CommentMapper;
-import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.ArticleService;
 import com.sustech.main_service.service.CommentService;
 import com.sustech.main_service.service.TopicService;
@@ -16,7 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -56,8 +53,8 @@ public class UserController {
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
-        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNick_name(), user.getEmail(), user.getAvatar(), user.getBackground());
-        return Result.ok().code(200);
+        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNickName(), user.getEmail(), user.getAvatar(), user.getBackground());
+        return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
     }
 
     @ApiOperation(value = "返回用户文章")

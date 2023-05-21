@@ -18,14 +18,15 @@ import java.util.Map;
 public class AccountController {
     @Autowired
     private UserService userService;
+
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
     public Result login(String username, String password) {
         User user = userService.getByUsername(username);
 
-        if (user != null && password.equals(user.getPassword())){
-            Map<String,Object> data = new HashMap<>();
-            data.put("id",user.getId());
+        if (user != null && password.equals(user.getPassword())) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("id", user.getId());
             return Result.ok().code(200).data(data);
         }
 
@@ -34,29 +35,24 @@ public class AccountController {
 
     @ApiOperation(value = "注册接口")
     @PostMapping("register")
-    public Result register(String username, String password, String nick_name, String email) {
-        System.out.println(username+password+nick_name+email);
+    public Result register(String username, String password, String nickName, String email) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setNick_name(nick_name);
+        user.setNickName(nickName);
         user.setEmail(email);
-        User dbUser = userService.getByUsername(user.getUsername());
-        if (dbUser != null) {
-            return Result.error().message("User exists, please retry again");
-        }
-        String msg = "Success to register";
-        if (user.getPassword() == null) {
-            return Result.error().code(6000).message("no password");
-        }
-        user.setNick_name(user.getNick_name());
         user.setRole(1);
-        if (userService.addUser(user)) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("data", user);
-            return Result.ok().code(200).message(msg).data(map);
+        User dbUser = userService.getByUsername(username);
+        if (dbUser != null) {
+            return Result.error().message("User exists, please try again.");
         }
-        return Result.error();
+        if (user.getPassword() == null) {
+            return Result.error().code(6000).message("No password.");
+        }
+        if (userService.addUser(user)) {
+            return Result.ok().code(200).message("Success to register.").data(Map.of("data", user));
+        }
+        return Result.error().message("Fail to add user");
     }
 
     @PostMapping("revise")
