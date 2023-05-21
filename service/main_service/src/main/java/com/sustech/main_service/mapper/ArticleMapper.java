@@ -20,4 +20,7 @@ public interface ArticleMapper {
 
     @Select("SELECT * FROM t_article LIMIT (#{lastIndex}-#{firstIndex}) OFFSET #{firstIndex}")
     List<Article> getArticlePage(int firstIndex, int lastIndex);
+
+    @Select("SELECT * FROM t_article WHERE user_id=#{userId}")
+    List<Article> getUserArticles(String userId);
 }

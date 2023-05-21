@@ -14,4 +14,6 @@ public interface ArticleService {
     Result getById(String id);
 
     List<Article> getArticlePage(int currentPage, int pageSize);
+
+    List<Article> getUserArticles(String id);
 }

@@ -1,5 +1,6 @@
 package com.sustech.main_service.mapper;
 
+import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,6 +22,9 @@ public interface TopicMapper {
 
     @Select("SELECT * FROM t_topic LIMIT (#{lastIndex}-#{firstIndex}) OFFSET #{firstIndex}")
     List<Topic> getTopicPage(int firstIndex, int lastIndex);
+
+    @Select("SELECT * FROM t_topic WHERE user_id=#{userId}")
+    List<Topic> getUserTopics(String userId);
 }
 
 

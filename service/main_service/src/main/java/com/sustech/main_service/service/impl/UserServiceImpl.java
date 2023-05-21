@@ -1,5 +1,6 @@
 package com.sustech.main_service.service.impl;
 
+import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.mapper.UserMapper;
 import com.sustech.main_service.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author Lynchrocket

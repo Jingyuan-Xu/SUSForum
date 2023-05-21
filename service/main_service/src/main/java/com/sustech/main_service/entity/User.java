@@ -39,6 +39,11 @@ public class User{
     private String avatar = "";
 
     /**
+     * 背景
+     */
+    private String background = "";
+
+    /**
      * 角色（0管理员、1普通用户）
      */
     private Integer role = 0;

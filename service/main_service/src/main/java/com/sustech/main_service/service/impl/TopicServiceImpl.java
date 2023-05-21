@@ -1,6 +1,7 @@
 package com.sustech.main_service.service.impl;
 
 import com.alibaba.druid.sql.PagerUtils;
+import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
@@ -38,6 +39,11 @@ public class TopicServiceImpl implements TopicService {
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
         return topicMapper.getTopicPage(firstIndex, lastIndex);
+    }
+
+    @Override
+    public List<Topic> getUserTopics(String userId){
+        return topicMapper.getUserTopics(userId);
     }
 }
 

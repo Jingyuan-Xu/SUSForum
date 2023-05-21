@@ -57,4 +57,9 @@ public class ArticleServiceImpl implements ArticleService {
         });
         return articlePage;
     }
+
+    @Override
+    public List<Article> getUserArticles(String userId) {
+        return articleMapper.getUserArticles(userId);
+    }
 }
