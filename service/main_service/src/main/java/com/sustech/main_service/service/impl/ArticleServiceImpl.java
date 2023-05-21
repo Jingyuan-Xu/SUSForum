@@ -27,7 +27,6 @@ public class ArticleServiceImpl implements ArticleService {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         article.setGmt_create(currentTime);
         article.setGmt_modified(currentTime);
-        article.setId(SnowFlake.nextId());
         article.setLikes(0);
         if (article.getCover() == null) article.setCover("");
         if (article.getIs_anonymous() == null) article.setIs_anonymous(false);
@@ -61,7 +60,7 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getUserArticles(String userId) {
         return articleMapper.getUserArticles(userId);
     }
-
+    
     public List<Article> getAllArticle() {
         return articleMapper.getAllArticle();
     }

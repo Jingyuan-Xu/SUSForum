@@ -31,7 +31,13 @@ public class ArticleController {
 
     @PostMapping("save")
     @ApiOperation("保存文章")
-    public Result saveArticle(Article article) {
+    public Result saveArticle(String id,String title,String content,String user_id,String cover) {
+        Article article = new Article();
+        article.setCover(cover);
+        article.setTitle(title);
+        article.setId(id);
+        article.setContent(content);
+        article.setUser_id(user_id);
         if (articleService.saveArticle(article)) {
             return Result.ok().code(200);
         }
