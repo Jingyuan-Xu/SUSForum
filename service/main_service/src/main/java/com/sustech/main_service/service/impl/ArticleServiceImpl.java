@@ -60,6 +60,8 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getUserArticles(String userId) {
         return articleMapper.getUserArticles(userId);
+    }
+
     public List<Article> getAllArticle() {
         return articleMapper.getAllArticle();
     }
@@ -67,7 +69,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Result addComment(String user_id, String article_id, String info, String path) {
         String time = DateUtils.getCurrDate();
-        articleMapper.addComment(user_id,article_id,info,path,false,time);
+        articleMapper.addComment(user_id, article_id, info, path, false, time);
         return Result.ok().code(200);
     }
 }

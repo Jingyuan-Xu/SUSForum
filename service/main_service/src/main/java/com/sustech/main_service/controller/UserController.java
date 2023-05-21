@@ -83,8 +83,8 @@ public class UserController {
     }
 
     @ApiOperation(value = "返回用户话题")
-    @GetMapping("getUserTopics")
-    public Result getUserTopics(String userId) {
+    @GetMapping("getUserComments")
+    public Result getUserComments(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
