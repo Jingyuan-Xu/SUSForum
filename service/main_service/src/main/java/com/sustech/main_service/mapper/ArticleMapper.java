@@ -23,4 +23,10 @@ public interface ArticleMapper {
 
     @Select("SELECT * FROM t_article WHERE user_id=#{userId}")
     List<Article> getUserArticles(String userId);
+    @Select("SELECT * FROM t_article")
+    List<Article> getAllArticle();
+
+    @Insert("insert into t_article_comment(content,article_id,path,user_id,is_anonymous,gmt_create) values(#{})")
+    int addComment(String user_id,String article_id,String content,String path,boolean is_anonymous,String gmt_create);
+
 }
