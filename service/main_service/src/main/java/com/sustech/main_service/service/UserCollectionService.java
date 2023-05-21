@@ -8,9 +8,9 @@ import java.util.List;
 public interface UserCollectionService {
     boolean addUserCollection(UserCollection userCollection);
 
-    boolean deleteUserCollection(String id);
+    boolean deleteUserCollection(int id);
 
-    UserCollection getByUserCollectionId(String id);
+    UserCollection getByUserCollectionId(int id);
 
     List<UserCollection> getUserCollections(String userId);
 }

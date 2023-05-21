@@ -52,7 +52,7 @@ public class UserController {
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
-        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNickName(), user.getEmail(), user.getAvatar(), user.getBackground());
+        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNick_name(), user.getEmail(), user.getAvatar(), user.getBackground());
         return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
     }
 
@@ -112,16 +112,16 @@ public class UserController {
         List<UserCollectionVO> userCollectionVOList = new ArrayList<>();
         for (UserCollection x : userCollectionList) {
             if (x.getStatus() == 0) continue;
-            Topic topic = topicService.getByTopicId(x.getTopicId());
+            Topic topic = topicService.getByTopicId(x.getTopic_id());
             String topicTitle = (topic == null) ? "" : topic.getTitle();
-            Article article = articleService.getByArticleId(x.getArticleId());
+            Article article = articleService.getByArticleId(x.getArticle_id());
             String articleTitle = (article == null) ? "" : article.getTitle();
             UserCollectionVO u = new UserCollectionVO();
             u.setId(x.getId());
-            u.setUserId(x.getUserId());
-            u.setTopicId(x.getTopicId());
+            u.setUserId(x.getUser_id());
+            u.setTopicId(x.getTopic_id());
             u.setTopicTitle(topicTitle);
-            u.setArticleId(x.getArticleId());
+            u.setArticleId(x.getArticle_id());
             u.setArticleTitle(articleTitle);
             userCollectionVOList.add(u);
         }

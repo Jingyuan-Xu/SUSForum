@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class UserCollection {
-    String id;
-    String userId;
-    String topicId;
-    String articleId;
+    Long id;
+    String user_id;
+    String topic_id;
+    String article_id;
     Integer status;
-    String gmtCreate;
-    String gmtModified;
+    String gmt_create;
+    String gmt_modified;
 }

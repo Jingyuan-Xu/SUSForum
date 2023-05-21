@@ -33,11 +33,11 @@ public class AccountController {
 
     @ApiOperation(value = "注册接口")
     @PostMapping("register")
-    public Result register(String username, String password, String nickName, String email) {
+    public Result register(String username, String password, String nick_name, String email) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setNickName(nickName);
+        user.setNick_name(nick_name);
         user.setEmail(email);
         user.setRole(1);
         User dbUser = userService.getByUsername(username);

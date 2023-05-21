@@ -64,7 +64,7 @@ public class ArticleController {
 
         for (Article article : articlePage) {
             User author = userService.getByUserId(article.getUser_id());
-            article.setUser_id(author.getNickName());
+            article.setUser_id(author.getNick_name());
             articleVoPage.add(article);
         }
 
@@ -87,7 +87,7 @@ public class ArticleController {
 
         for (Article article : articlePage) {
             User author = userService.getByUserId(article.getUser_id());
-            article.setUser_id(author.getNickName());
+            article.setUser_id(author.getNick_name());
             articleVoPage.add(article);
         }
 

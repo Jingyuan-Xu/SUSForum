@@ -5,7 +5,7 @@ import org.apache.ibatis.javassist.compiler.ast.Pair;
 
 @Data
 public class UserCollectionVO {
-    String id;
+    Long id;
     String userId;
     String topicId;
     String topicTitle;

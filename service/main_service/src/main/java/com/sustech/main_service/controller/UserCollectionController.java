@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Objects;
 
 @Api("用户收藏模块")
 @RestController
@@ -23,11 +22,11 @@ public class UserCollectionController {
     @PostMapping("addUserCollections")
     public Result addUserCollections(String userId, String articleOrTopicId, boolean isArticle) {
         UserCollection userCollection = new UserCollection();
-        userCollection.setUserId(userId);
+        userCollection.setUser_id(userId);
         if (isArticle) {
-            userCollection.setArticleId(articleOrTopicId);
+            userCollection.setArticle_id(articleOrTopicId);
         } else {
-            userCollection.setTopicId(articleOrTopicId);
+            userCollection.setTopic_id(articleOrTopicId);
         }
         if (userCollectionService.addUserCollection(userCollection)) {
             return Result.ok().code(200).message("Success to add collection.").data(Map.of("data", userCollection));
@@ -36,13 +35,13 @@ public class UserCollectionController {
     }
 
     @ApiOperation(value = "删除收藏")
-    @PostMapping("addUserCollections")
-    public Result addUserCollections(String userId, String id) {
-        UserCollection userCollection = userCollectionService.getByUserCollectionId(id);
-        if (!userCollection.getUserId().equals(userId)) {
+    @PostMapping("deleteUserCollections")
+    public Result deleteUserCollections(String userId, int collectionId) {
+        UserCollection userCollection = userCollectionService.getByUserCollectionId(collectionId);
+        if (userCollection == null || !userCollection.getUser_id().trim().equals(userId)) {
             return Result.error().message("Can not delete collection");
         }
-        if(userCollectionService.deleteUserCollection(id)){
+        if (userCollectionService.deleteUserCollection(collectionId)) {
             return Result.ok().message("Success to delete collection");
         }
         return Result.error().message("Fail to delete collection");

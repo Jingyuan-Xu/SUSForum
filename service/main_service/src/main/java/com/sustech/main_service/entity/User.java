@@ -26,7 +26,7 @@ public class User{
     /**
      * 昵称
      */
-    private String nickName = "";
+    private String nick_name = "";
 
     /**
      * 邮箱
@@ -51,10 +51,10 @@ public class User{
     /**
      * 创建时间
      */
-    private String gmtCreate = "";
+    private String gmt_create = "";
     /**
      * 修改时间
      */
-    private String gmtModified = "";
+    private String gmt_modified = "";
 
 }
