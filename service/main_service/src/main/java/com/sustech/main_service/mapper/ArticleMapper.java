@@ -20,4 +20,11 @@ public interface ArticleMapper {
 
     @Select("SELECT * FROM t_article LIMIT (#{lastIndex}-#{firstIndex}) OFFSET #{firstIndex}")
     List<Article> getArticlePage(int firstIndex, int lastIndex);
+
+    @Select("SELECT * FROM t_article")
+    List<Article> getAllArticle();
+
+    @Insert("insert into t_article_comment(content,article_id,path,user_id,is_anonymous,gmt_create) values(#{})")
+    int addComment(String user_id,String article_id,String content,String path,boolean is_anonymous,String gmt_create);
+
 }

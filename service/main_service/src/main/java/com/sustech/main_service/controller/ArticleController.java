@@ -41,19 +41,19 @@ public class ArticleController {
     @ApiOperation("查询文章")
     @GetMapping("getById")
     public Result getArticle(String id) {
+        System.out.println(id);
         return articleService.getById(id);
     }
 
     @ApiOperation("查询文章分页列表")
     @PostMapping("getPage")
     public Result getArticlePage(int currentPage, int pageSize) {
-        System.out.println("in getarticle");
         List<Article> articlePage = articleService.getArticlePage(currentPage, pageSize);
-        if (articlePage == null||articlePage.size()==0)
+        if (articlePage == null || articlePage.size() == 0)
             return Result.error().message("No article");
-        List<Article> articleVoPage=new ArrayList<>();
+        List<Article> articleVoPage = new ArrayList<>();
 
-        for(Article article:articlePage){
+        for (Article article : articlePage) {
             User author = userService.getByUserId(article.getUser_id());
             article.setUser_id(author.getNick_name());
             articleVoPage.add(article);
@@ -66,6 +66,34 @@ public class ArticleController {
         Map<String, Object> map = new HashMap<>();
         map.put("data", articleVoPage);
         return Result.ok().code(200).data(map);
+    }
+
+    @ApiOperation("查询文章列表")
+    @PostMapping("getAllArticle")
+    public Result getAllArticle() {
+        List<Article> articlePage = articleService.getAllArticle();
+        if (articlePage == null || articlePage.size() == 0)
+            return Result.error().message("No article");
+        List<Article> articleVoPage = new ArrayList<>();
+
+        for (Article article : articlePage) {
+            User author = userService.getByUserId(article.getUser_id());
+            article.setUser_id(author.getNick_name());
+            articleVoPage.add(article);
+        }
+
+//        List<Article> articleVoPage = articlePage.stream().peek(x->{
+//            User author = userService.getByUserId(x.getUserId());
+//            x.setUserId(author.getNick_name());
+//        }).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", articleVoPage);
+        return Result.ok().code(200).data(map);
+    }
+
+    @PostMapping("comment")
+    public Result comment(String info,String article_id,String user_id,String path){
+        return articleService.addComment(user_id,article_id,info,path);
     }
 
 

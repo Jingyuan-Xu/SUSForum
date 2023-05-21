@@ -1,15 +1,14 @@
 package com.sustech.main_service.service.impl;
 
 import com.sustech.global.entity.Result;
+import com.sustech.global.utils.DateUtils;
 import com.sustech.main_service.entity.Article;
-import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.ArticleMapper;
 import com.sustech.main_service.service.ArticleService;
 import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -56,5 +55,17 @@ public class ArticleServiceImpl implements ArticleService {
 
         });
         return articlePage;
+    }
+
+    @Override
+    public List<Article> getAllArticle() {
+        return articleMapper.getAllArticle();
+    }
+
+    @Override
+    public Result addComment(String user_id, String article_id, String info, String path) {
+        String time = DateUtils.getCurrDate();
+        articleMapper.addComment(user_id,article_id,info,path,false,time);
+        return Result.ok().code(200);
     }
 }

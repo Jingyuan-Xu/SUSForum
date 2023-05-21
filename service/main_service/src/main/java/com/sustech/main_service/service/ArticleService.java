@@ -14,4 +14,8 @@ public interface ArticleService {
     Result getById(String id);
 
     List<Article> getArticlePage(int currentPage, int pageSize);
+
+    List<Article> getAllArticle();
+
+    Result addComment(String user_id,String article_id,String info,String path);
 }
