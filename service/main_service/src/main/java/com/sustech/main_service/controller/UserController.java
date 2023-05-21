@@ -1,19 +1,15 @@
 package com.sustech.main_service.controller;
 
 import com.sustech.global.entity.Result;
-import com.sustech.main_service.entity.Article;
-import com.sustech.main_service.entity.Comment;
-import com.sustech.main_service.entity.Topic;
-import com.sustech.main_service.entity.User;
-import com.sustech.main_service.service.ArticleService;
-import com.sustech.main_service.service.CommentService;
-import com.sustech.main_service.service.TopicService;
-import com.sustech.main_service.service.UserService;
+import com.sustech.main_service.entity.*;
+import com.sustech.main_service.entity.VO.UserCollectionVO;
+import com.sustech.main_service.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,6 +31,9 @@ public class UserController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private UserCollectionService userCollectionService;
+
     @ApiOperation(value = "获取用户所有数据")
     @GetMapping("getUserData")
     public Result getUserData(String userId) {
@@ -47,13 +46,13 @@ public class UserController {
     }
 
     @ApiOperation(value = "修改用户数据")
-    @GetMapping("editUserData")
+    @PostMapping("editUserData")
     public Result editUserData(User user) {
         User dbUser = userService.getByUserId(user.getId());
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
-        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNickName(), user.getEmail(), user.getAvatar(), user.getBackground());
+        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNick_name(), user.getEmail(), user.getAvatar(), user.getBackground());
         return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
     }
 
@@ -97,5 +96,36 @@ public class UserController {
             return Result.error().message("No such user comments");
         }
         return Result.ok().code(200).data(Map.of("data", commentList));
+    }
+
+    @ApiOperation(value = "返回用户收藏")
+    @GetMapping("getUserCollections")
+    public Result getUserCollections(String userId) {
+        User user = userService.getByUserId(userId);
+        if (user == null) {
+            return Result.error().message("No such user");
+        }
+        List<UserCollection> userCollectionList = userCollectionService.getUserCollections(userId);
+        if (userCollectionList == null) {
+            return Result.error().message("No such user collections");
+        }
+        List<UserCollectionVO> userCollectionVOList = new ArrayList<>();
+        for (UserCollection x : userCollectionList) {
+            if (x.getStatus() == 0) continue;
+            Topic topic = topicService.getByTopicId(x.getTopic_id());
+            String topicTitle = (topic == null) ? "" : topic.getTitle();
+            Article article = articleService.getByArticleId(x.getArticle_id());
+            String articleTitle = (article == null) ? "" : article.getTitle();
+            UserCollectionVO u = new UserCollectionVO();
+            u.setId(x.getId());
+            u.setUserId(x.getUser_id());
+            u.setTopicId(x.getTopic_id());
+            u.setTopicTitle(topicTitle);
+            u.setArticleId(x.getArticle_id());
+            u.setArticleTitle(articleTitle);
+            userCollectionVOList.add(u);
+        }
+
+        return Result.ok().code(200).data(Map.of("data", userCollectionVOList));
     }
 }

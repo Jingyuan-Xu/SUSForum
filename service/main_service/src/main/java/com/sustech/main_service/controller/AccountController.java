@@ -25,9 +25,7 @@ public class AccountController {
         User user = userService.getByUsername(username);
 
         if (user != null && password.equals(user.getPassword())) {
-            Map<String, Object> data = new HashMap<>();
-            data.put("id", user.getId());
-            return Result.ok().code(200).data(data);
+            return Result.ok().code(200).data(Map.of("id", user.getId()));
         }
 
         return Result.error().message("No such user or invalid username or password");
@@ -35,11 +33,11 @@ public class AccountController {
 
     @ApiOperation(value = "注册接口")
     @PostMapping("register")
-    public Result register(String username, String password, String nickName, String email) {
+    public Result register(String username, String password, String nick_name, String email) {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        user.setNickName(nickName);
+        user.setNick_name(nick_name);
         user.setEmail(email);
         user.setRole(1);
         User dbUser = userService.getByUsername(username);

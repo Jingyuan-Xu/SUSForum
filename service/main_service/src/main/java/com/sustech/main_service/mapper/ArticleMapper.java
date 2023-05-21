@@ -16,7 +16,7 @@ public interface ArticleMapper {
     int addArticle(Article article);
 
     @Select("select * from t_article where id=#{id}")
-    Article selectById(String id);
+    Article getById(String id);
 
     @Select("SELECT * FROM t_article LIMIT (#{lastIndex}-#{firstIndex}) OFFSET #{firstIndex}")
     List<Article> getArticlePage(int firstIndex, int lastIndex);

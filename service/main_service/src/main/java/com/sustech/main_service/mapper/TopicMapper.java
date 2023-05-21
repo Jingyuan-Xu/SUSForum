@@ -20,6 +20,9 @@ public interface TopicMapper {
     @Insert("INSERT INTO t_topic VALUES (#{topic.id}, #{topic.title}, #{topic.user_id}, #{topic.is_anonymous}, #{topic.views}, #{topic.answers}, #{topic.likes})")
     int addTopic(Topic topic);
 
+    @Select("SELECT * FROM t_topic WHERE id=#{id}")
+    Topic getByTopicId(String id);
+
     @Select("SELECT * FROM t_topic LIMIT (#{lastIndex}-#{firstIndex}) OFFSET #{firstIndex}")
     List<Topic> getTopicPage(int firstIndex, int lastIndex);
 

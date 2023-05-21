@@ -21,7 +21,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     ArticleMapper articleMapper;
 
-
     @Override
     public boolean saveArticle(Article article) {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
@@ -34,12 +33,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Result getById(String id) {
-        Article article = articleMapper.selectById(id);
-        if (article == null) return Result.error().code(4000).message("no article found");
-        Map<String, Object> data = new HashMap<>();
-        data.put("article", article);
-        return Result.ok().code(200).data(data);
+    public Article getByArticleId(String id) {
+        return articleMapper.getById(id);
     }
 
     @Override
@@ -51,7 +46,6 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> articlePage = articleMapper.getArticlePage(firstIndex, lastIndex);
         articlePage.stream().peek(x -> {
             if (x.getCover() == null) x.setCover("");
-
         });
         return articlePage;
     }

@@ -13,6 +13,8 @@ import java.util.List;
 public interface TopicService {
     boolean addTopic(Topic topic);
 
+    Topic getByTopicId(String id);
+
     List<Topic> getTopicPage(int currentPage, int pageSize);
 
     List<Topic> getUserTopics(String userId);

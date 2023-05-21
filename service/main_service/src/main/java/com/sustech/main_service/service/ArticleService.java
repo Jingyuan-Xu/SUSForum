@@ -11,7 +11,7 @@ public interface ArticleService {
 
     boolean saveArticle(Article article);
 
-    Result getById(String id);
+    Article getByArticleId(String id);
 
     List<Article> getArticlePage(int currentPage, int pageSize);
 
