@@ -1,0 +1,55 @@
+server:
+  port: 8020
+spring:
+  application:
+    name: video
+  profiles:
+    active: dev
+  mvc:
+    path-match:
+      matching-strategy: ant_path_matcher
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  #  redis:
+  #    database: 0
+  #    host: 123.249.105.74
+  #    password: sustech-application
+  #    port: 6379
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://10.16.4.246:5432/susforum
+      username: postgres
+      password: 123456
+
+      #?????????
+      initial-size: 15
+      min-idle: 10
+      max-active: 50
+
+      #????????
+      max-wait: 30000
+
+      #????????
+      min-evictable-idle-time-millis: 30000
+
+  # configuration of mail
+  mail:
+    default-encoding: utf-8
+    host: smtp.qq.com
+    username: 873121944@qq.com
+    password: uxzaglnmplnybajh
+    port: 465
+    properties:
+      mail:
+        smtp:
+          auth: true
+        ssl:
+          enable: true
+        starttls:
+          enable: true
+          required: true

@@ -1,4 +1,4 @@
-package com.example.video_service;
+package com.sustech.video_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

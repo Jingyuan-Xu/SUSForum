@@ -24,7 +24,6 @@ public class FileUploadingController {
     @ApiOperation(value = "上传文件至云端")
     @PostMapping("uploading")
     public Result upload(MultipartFile file){
-        System.out.println("----------------");
         String url= fileUploadingService.upload(file);
         Map<String,Object> data = new HashMap<>();
         data.put("url",url);
