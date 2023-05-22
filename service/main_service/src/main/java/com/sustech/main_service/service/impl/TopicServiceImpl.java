@@ -1,14 +1,14 @@
 package com.sustech.main_service.service.impl;
 
-import com.sustech.global.entity.Result;
+import com.sustech.global.utils.DateUtils;
+import com.sustech.main_service.entity.Comment;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +35,17 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public boolean addComment(String user_id, String topic_id, String info, String path) {
+        String time = DateUtils.getCurrDate();
+        return topicMapper.addComment(user_id, topic_id, info, path, false, time) > 0;
+    }
+
+    @Override
+    public List<Comment> getTopicComments(String id) {
+        return topicMapper.getTopicComments(id);
+    }
+
+    @Override
     public Topic getByTopicId(String id) {
         return topicMapper.getByTopicId(id);
     }
@@ -42,7 +53,7 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> getTopicPage(int currentPage, int pageSize) {
         if (currentPage <= 0 || pageSize <= 0)
-            return null;
+            return new ArrayList<>();
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
         return topicMapper.getTopicPage(firstIndex, lastIndex);

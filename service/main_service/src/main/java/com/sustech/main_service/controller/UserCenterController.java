@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Api("用户个人中心模块")
+@Api(tags = "用户个人中心模块")
 @RestController
 @RequestMapping("/userCenter")
 @CrossOrigin
-public class UserController {
+public class UserCenterController {
 
     @Autowired
     private UserService userService;

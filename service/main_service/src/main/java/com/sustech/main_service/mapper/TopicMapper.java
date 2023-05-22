@@ -1,6 +1,8 @@
 package com.sustech.main_service.mapper;
 
 import com.sustech.main_service.entity.Article;
+import com.sustech.main_service.entity.ArticleComment;
+import com.sustech.main_service.entity.Comment;
 import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,6 +25,12 @@ public interface TopicMapper {
 
     @Update("UPDATE t_topic SET title=#{title},user_id=#{user_id},is_anonymous=#{is_anonymous},views=#{views},answers=#{answers},likes=#{likes},valid=#{valid} WHERE id=#{id}")
     int reviseTopic(Topic topic);
+
+    @Insert("INSERT INTO t_comment(content,topic_id,path,user_id,is_anonymous,gmt_create) values(#{content},#{topic_id},#{path},#{user_id},#{is_anonymous},#{gmt_create})")
+    int addComment(String user_id, String topic_id, String content, String path, boolean is_anonymous, String gmt_create);
+
+    @Select("SELECT * FROM t_comment WHERE topic_id=#{id}")
+    List<Comment> getTopicComments(String id);
 
     @Select("SELECT * FROM t_topic WHERE id=#{id}")
     Topic getByTopicId(String id);

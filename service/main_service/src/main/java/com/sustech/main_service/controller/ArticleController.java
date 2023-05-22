@@ -2,6 +2,7 @@ package com.sustech.main_service.controller;
 
 import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
+import com.sustech.main_service.entity.ArticleComment;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.service.ArticleService;
 import com.sustech.main_service.service.UserService;
@@ -79,9 +80,19 @@ public class ArticleController {
     }
 
     @ApiOperation("评论文章")
-    @PostMapping("comment")
-    public Result comment(String info, String articleId, String userId, String path) {
+    @PostMapping("commentArticle")
+    public Result commentArticle(String info, String articleId, String userId, String path) {
         return articleService.addComment(userId, articleId, info, path);
+    }
+
+    @ApiOperation("获取文章评论")
+    @PostMapping("getArticleComments")
+    public Result getArticleComments(String id) {
+        List<ArticleComment> articleCommentList = articleService.getArticleComments(id);
+        if (articleCommentList == null) {
+            return Result.error().message("Fail to get article comments");
+        }
+        return Result.ok().data(Map.of("articleComments", articleCommentList));
     }
 
     @ApiOperation("点赞文章")

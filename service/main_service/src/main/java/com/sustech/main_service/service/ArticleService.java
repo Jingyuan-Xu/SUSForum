@@ -2,8 +2,7 @@ package com.sustech.main_service.service;
 
 import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
-import com.sustech.main_service.entity.Topic;
-import org.apache.ibatis.annotations.Select;
+import com.sustech.main_service.entity.ArticleComment;
 
 import java.util.List;
 
@@ -19,6 +18,8 @@ public interface ArticleService {
     List<Article> getAllArticle();
 
     Result addComment(String user_id,String article_id,String info,String path);
+
+    List<ArticleComment> getArticleComments(String id);
 
     boolean likeArticle(String articleId);
 

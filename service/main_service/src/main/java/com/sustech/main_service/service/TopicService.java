@@ -1,6 +1,6 @@
 package com.sustech.main_service.service;
 
-import com.sustech.main_service.entity.Article;
+import com.sustech.main_service.entity.Comment;
 import com.sustech.main_service.entity.Topic;
 
 import java.util.List;
@@ -14,6 +14,10 @@ public interface TopicService {
     boolean addTopic(Topic topic);
 
     boolean deleteTopic(String id);
+
+    boolean addComment(String user_id, String topic_id, String info, String path);
+
+    List<Comment> getTopicComments(String id);
 
     Topic getByTopicId(String id);
 
