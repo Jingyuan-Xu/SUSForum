@@ -26,12 +26,12 @@ public class Topic implements Serializable {
     /**
      * 话题提出者（外键关联t_user）
      */
-    private String userId;
+    private String user_id;
 
     /**
      * 是否匿名
      */
-    private Boolean isAnonymous;
+    private Boolean is_anonymous;
 
     /**
      * 阅览人数
@@ -51,10 +51,10 @@ public class Topic implements Serializable {
     /**
      * 创建时间
      */
-    private String gmtCreate;
+    private String gmt_create;
 
     /**
      * 修改时间
      */
-    private String gmtModified;
+    private String gmt_modified;
 }

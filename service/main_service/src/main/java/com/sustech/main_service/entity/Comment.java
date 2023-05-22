@@ -6,11 +6,11 @@ import lombok.Data;
 public class Comment {
     Integer id;
     String content;
-    String topicId;
+    String topic_id;
     String path;
-    String userId;
+    String user_id;
     Integer likes;
-    Boolean isAnonymous;
-    String gmtCreate;
-    String gmtModified;
+    Boolean is_anonymous;
+    String gmt_create;
+    String gmt_modified;
 }

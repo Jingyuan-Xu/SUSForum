@@ -6,7 +6,7 @@ import lombok.Data;
 public class ArticleComment {
     Integer id;
     String content;
-    String aritcle_id;
+    String article_id;
     String path;
     String user_id;
     Integer likes;

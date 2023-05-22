@@ -26,9 +26,8 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public boolean addTopic(Topic topic) {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        topic.setGmtCreate(currentTime);
-        topic.setGmtModified(currentTime);
-        topic.setId(SnowFlake.nextId());
+        topic.setGmt_create(currentTime);
+        topic.setGmt_modified(currentTime);
         return topicMapper.addTopic(topic) > 0;
     }
 

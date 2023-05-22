@@ -23,9 +23,9 @@ public class AccountController {
     @PostMapping("login")
     public Result login(String username, String password) {
         User user = userService.getByUsername(username);
-        if (user != null && password.equals(user.getPassword())){
-            Map<String,Object> data = new HashMap<>();
-            data.put("user",user);
+        if (user != null && password.equals(user.getPassword())) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("user", user);
             return Result.ok().code(200).data(data);
         }
         return Result.error().message("No such user or invalid username or password");
@@ -48,7 +48,7 @@ public class AccountController {
             return Result.error().code(6000).message("No password.");
         }
         if (userService.addUser(user)) {
-            return Result.ok().code(200).message("Success to register.").data(Map.of("data", user));
+            return Result.ok().code(200).message("Success to register.").data(Map.of("user", user));
         }
         return Result.error().message("Fail to add user");
     }

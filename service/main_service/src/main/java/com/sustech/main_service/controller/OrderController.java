@@ -17,34 +17,33 @@ public class OrderController {
     @Autowired
     OrderService service;
 
-
     @PostMapping("add")
     @ApiOperation("新增订单")
-    public Result addOrder(String name,String picture,String publisher,boolean is_buyer,String contact,int price){
-        return service.addOrder(name,picture,publisher,is_buyer,contact,price);
+    public Result addOrder(String name, String picture, String publisher, boolean is_buyer, String contact, int price) {
+        return service.addOrder(name, picture, publisher, is_buyer, contact, price);
     }
 
     @GetMapping("getAll")
     @ApiOperation("获取全部订单")
-    public Result getAllOrder(){
+    public Result getAllOrder() {
         return service.getAllOrder();
     }
 
     @PostMapping("buy")
     @ApiOperation("为订单添加购买者")
-    public Result buyOrder(int id,String user_id,String contact){
-        return service.buyOrder(id,user_id,contact);
+    public Result buyOrder(int id, String user_id, String contact) {
+        return service.buyOrder(id, user_id, contact);
     }
 
     @PostMapping("sell")
     @ApiOperation("为订单添加出售者")
-    public Result sellOrder(int id,String user_id,String contact){
-        return service.sellOrder(id,user_id,contact);
+    public Result sellOrder(int id, String user_id, String contact) {
+        return service.sellOrder(id, user_id, contact);
     }
 
     @PostMapping("delete")
     @ApiOperation("删除订单")
-    public Result deleteById(int id){
+    public Result deleteById(int id) {
         return service.deleteOrder(id);
     }
 
