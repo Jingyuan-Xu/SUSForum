@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-public class UserUserCollectionServiceImpl implements UserCollectionService {
+public class UserCollectionServiceImpl implements UserCollectionService {
 
     @Autowired
     private UserCollectionMapper userCollectionMapper;

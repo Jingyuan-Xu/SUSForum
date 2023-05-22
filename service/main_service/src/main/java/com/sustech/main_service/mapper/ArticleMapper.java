@@ -1,12 +1,10 @@
 package com.sustech.main_service.mapper;
 
 import com.sustech.main_service.entity.Article;
-import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

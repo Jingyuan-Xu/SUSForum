@@ -1,11 +1,9 @@
 package com.sustech.main_service.service.impl;
 
-import com.alibaba.druid.sql.PagerUtils;
-import com.sustech.main_service.entity.Article;
+import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
-import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +23,15 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public boolean addTopic(Topic topic) {
-        String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        topic.setGmt_create(currentTime);
-        topic.setGmt_modified(currentTime);
+        topic.setValid(true);
         return topicMapper.addTopic(topic) > 0;
+    }
+
+    @Override
+    public boolean deleteTopic(String id) {
+        Topic topic = topicMapper.getByTopicId(id);
+        topic.setValid(false);
+        return topicMapper.reviseTopic(topic) > 0;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<Topic> getTopicPage(int currentPage, int pageSize) {
-        if(currentPage <= 0 || pageSize <= 0)
+        if (currentPage <= 0 || pageSize <= 0)
             return null;
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
@@ -46,7 +49,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public List<Topic> getUserTopics(String userId){
+    public List<Topic> getUserTopics(String userId) {
         return topicMapper.getUserTopics(userId);
     }
 }

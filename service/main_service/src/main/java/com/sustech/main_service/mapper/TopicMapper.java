@@ -5,6 +5,7 @@ import com.sustech.main_service.entity.Topic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -17,8 +18,11 @@ import java.util.List;
 @Mapper
 public interface TopicMapper {
 
-    @Insert("INSERT INTO t_topic VALUES (#{topic.id}, #{topic.title}, #{topic.user_id}, #{topic.is_anonymous}, #{topic.views}, #{topic.answers}, #{topic.likes})")
+    @Insert("INSERT INTO t_topic VALUES (#{id}, #{title}, #{user_id}, #{is_anonymous}, #{views}, #{answers}, #{likes}, #{valid})")
     int addTopic(Topic topic);
+
+    @Update("UPDATE t_topic SET title=#{title},user_id=#{user_id},is_anonymous=#{is_anonymous},views=#{views},answers=#{answers},likes=#{likes},valid=#{valid} WHERE id=#{id}")
+    int reviseTopic(Topic topic);
 
     @Select("SELECT * FROM t_topic WHERE id=#{id}")
     Topic getByTopicId(String id);

@@ -1,10 +1,8 @@
 package com.sustech.main_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 话题表
@@ -48,13 +46,14 @@ public class Topic implements Serializable {
      * */
     private Integer likes;
 
+    private Boolean valid;
+
     /**
      * 创建时间
      */
-    private String gmt_create;
-
+    private String gmt_create = "";
     /**
      * 修改时间
      */
-    private String gmt_modified;
+    private String gmt_modified = "";
 }

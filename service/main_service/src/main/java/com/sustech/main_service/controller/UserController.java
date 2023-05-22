@@ -41,7 +41,6 @@ public class UserController {
         if (user == null) {
             return Result.error().message("No such user");
         }
-
         return Result.ok().code(200).data(Map.of("data", user));
     }
 
@@ -52,7 +51,7 @@ public class UserController {
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
-        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNick_name(), user.getEmail(), user.getAvatar(), user.getBackground());
+        userService.reviseInfo(user);
         return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
     }
 

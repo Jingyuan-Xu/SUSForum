@@ -23,4 +23,12 @@ public class TopicController {
             return Result.ok().code(200);
         return Result.error();
     }
+
+    @ApiOperation(value = "删除话题")
+    @PostMapping("deleteTopic")
+    public Result deleteTopic(String id) {
+        if (topicService.deleteTopic(id))
+            return Result.ok().code(200);
+        return Result.error();
+    }
 }

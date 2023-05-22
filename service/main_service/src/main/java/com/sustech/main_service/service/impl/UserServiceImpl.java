@@ -1,10 +1,8 @@
 package com.sustech.main_service.service.impl;
 
-import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.mapper.UserMapper;
 import com.sustech.main_service.service.UserService;
-import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +25,6 @@ public class UserServiceImpl implements UserService {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         user.setGmt_create(currentTime);
         user.setGmt_modified(currentTime);
-        user.setId(SnowFlake.nextId());
         return userMapper.addUser(user) > 0;
     }
 
@@ -42,8 +39,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean reviseInfo(String id, String username, String password, String nick_name, String email, String avatar, String background) {
-        return userMapper.revise(id, username, password, nick_name, email, avatar, background) > 0;
+    public boolean reviseInfo(User user) {
+        return userMapper.revise(user) > 0;
     }
 }
 

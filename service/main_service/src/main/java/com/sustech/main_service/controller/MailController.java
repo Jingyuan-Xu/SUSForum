@@ -16,8 +16,8 @@ public class MailController {
     private MailService mailService;
 
     @PostMapping("/sendMail")
-    public Result SendSimpleMessage(@RequestBody MailRequest mailRequest) {
+    public Result sendSimpleMessage(@RequestBody MailRequest mailRequest) {
         mailService.sendMail(mailRequest);
-        return Result.ok();
+        return Result.ok().message("Successfully send mail");
     }
 }

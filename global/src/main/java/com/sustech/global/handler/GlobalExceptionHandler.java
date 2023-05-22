@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public Result UnknownError(){
+    public Result unknownError(){
         return Result.error()
                 .message("未被定义的错误")
                 .code(1000);

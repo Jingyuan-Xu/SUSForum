@@ -5,12 +5,12 @@ import com.sustech.global.utils.DateUtils;
 import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.mapper.ArticleMapper;
 import com.sustech.main_service.service.ArticleService;
-import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getArticlePage(int currentPage, int pageSize) {
         if (currentPage <= 0 || pageSize <= 0)
-            return null;
+            return new ArrayList<>();
         int firstIndex = (currentPage - 1) * pageSize;
         int lastIndex = currentPage * pageSize;
         List<Article> articlePage = articleMapper.getArticlePage(firstIndex, lastIndex);
