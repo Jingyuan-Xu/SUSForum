@@ -27,8 +27,7 @@ public class TopicController {
         topic.setTitle(title);
         topic.setIs_anonymous(is_Anonymous);
         topic.setUser_id(user_id);
-        if (topicService.addTopic(topic))
-            return Result.ok().code(200);
+        if (topicService.addTopic(topic)) return Result.ok().code(200);
         return Result.error();
     }
 
