@@ -14,7 +14,7 @@ public interface UserCollectionMapper {
     UserCollection getById(int id);
     @Update("UPDATE t_collection SET status=0 WHERE id=#{id}")
     int deleteUserCollection(int id);
-    @Insert("INSERT INTO t_collection(user_id,topic_id,article_id,gmt_create,gmt_modified) VALUES (#{userId},#{topicId},#{articleId},#{gmtCreate},#{gmtModified})")
+    @Insert("INSERT INTO t_collection(user_id,topic_id,article_id,gmt_create,gmt_modified) VALUES (#{user_id},#{topic_d},#{article_id},#{gmt_create},#{gmt_modified})")
     int addUserCollection(UserCollection userCollection);
     @Select("SELECT * FROM t_collection WHERE user_id=#{userId}")
     List<UserCollection> getUserCollections(String userId);

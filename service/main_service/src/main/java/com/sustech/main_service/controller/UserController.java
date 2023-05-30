@@ -41,7 +41,6 @@ public class UserController {
         if (user == null) {
             return Result.error().message("No such user");
         }
-
         return Result.ok().code(200).data(Map.of("data", user));
     }
 
@@ -112,7 +111,7 @@ public class UserController {
         List<UserCollectionVO> userCollectionVOList = new ArrayList<>();
         for (UserCollection x : userCollectionList) {
             if (x.getStatus() == 0) continue;
-            Topic topic = topicService.getByTopicId(x.getTopic_id());
+            Topic topic = (Topic) topicService.getById(x.getTopic_id()).getData().get("topic");
             String topicTitle = (topic == null) ? "" : topic.getTitle();
             Article article = articleService.getByArticleId(x.getArticle_id());
             String articleTitle = (article == null) ? "" : article.getTitle();

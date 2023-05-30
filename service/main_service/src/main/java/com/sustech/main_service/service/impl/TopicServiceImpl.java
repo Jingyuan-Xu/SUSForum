@@ -1,6 +1,7 @@
 package com.sustech.main_service.service.impl;
 
 import com.alibaba.druid.sql.PagerUtils;
+import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Lynchrocket
@@ -26,30 +29,33 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public boolean addTopic(Topic topic) {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
-        topic.setGmtCreate(currentTime);
-        topic.setGmtModified(currentTime);
+        topic.setGmt_create(currentTime);
+        topic.setGmt_modified(currentTime);
         topic.setId(SnowFlake.nextId());
         return topicMapper.addTopic(topic) > 0;
     }
 
     @Override
-    public Topic getByTopicId(String id) {
-        return topicMapper.getByTopicId(id);
+    public Result getAllTopic() {
+        List<Topic> list = topicMapper.getAllTopic();
+        Map<String,Object> data = new HashMap<>();
+        data.put("topics",list);
+        return Result.ok().code(200).data(data);
     }
 
     @Override
-    public List<Topic> getTopicPage(int currentPage, int pageSize) {
-        if(currentPage <= 0 || pageSize <= 0)
-            return null;
-        int firstIndex = (currentPage - 1) * pageSize;
-        int lastIndex = currentPage * pageSize;
-        return topicMapper.getTopicPage(firstIndex, lastIndex);
+    public Result getById(String id) {
+        Topic topic = topicMapper.getByTopicId(id);
+        Map<String, Object> data = new HashMap<>();
+        data.put("topic",topic);
+        return Result.ok().code(200).data(data);
     }
 
     @Override
     public List<Topic> getUserTopics(String userId){
         return topicMapper.getUserTopics(userId);
     }
+
 }
 
 

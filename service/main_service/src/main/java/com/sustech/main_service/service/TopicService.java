@@ -1,5 +1,6 @@
 package com.sustech.main_service.service;
 
+import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 
@@ -13,9 +14,10 @@ import java.util.List;
 public interface TopicService {
     boolean addTopic(Topic topic);
 
-    Topic getByTopicId(String id);
 
-    List<Topic> getTopicPage(int currentPage, int pageSize);
 
     List<Topic> getUserTopics(String userId);
+
+    Result getAllTopic();
+    Result getById(String id);
 }

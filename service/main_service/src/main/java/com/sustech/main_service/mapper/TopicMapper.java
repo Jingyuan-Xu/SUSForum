@@ -17,8 +17,11 @@ import java.util.List;
 @Mapper
 public interface TopicMapper {
 
-    @Insert("INSERT INTO t_topic VALUES (#{topic.id}, #{topic.title}, #{topic.user_id}, #{topic.is_anonymous}, #{topic.views}, #{topic.answers}, #{topic.likes})")
+    @Insert("INSERT INTO t_topic VALUES (#{id}, #{title}, #{user_id}, #{is_anonymous}, #{views}, #{answers}, #{likes},#{valid},#{gmt_create},#{gmt_modified})")
     int addTopic(Topic topic);
+
+    @Select("select * from t_topic")
+    List<Topic> getAllTopic();
 
     @Select("SELECT * FROM t_topic WHERE id=#{id}")
     Topic getByTopicId(String id);

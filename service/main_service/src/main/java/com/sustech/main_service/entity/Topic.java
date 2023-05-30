@@ -12,49 +12,18 @@ import java.util.Date;
  * @TableName t_topic
  */
 @Data
-public class Topic implements Serializable {
+public class Topic{
     /**
      * 主键ID
      */
     private String id;
-
-    /**
-     * 话题标题
-     */
-    private String title;
-
-    /**
-     * 话题提出者（外键关联t_user）
-     */
-    private String userId;
-
-    /**
-     * 是否匿名
-     */
-    private Boolean isAnonymous;
-
-    /**
-     * 阅览人数
-     */
-    private Integer views;
-
-    /**
-     * 回答人数
-     * */
-    private Integer answers;
-
-    /**
-     * 点赞数
-     * */
-    private Integer likes;
-
-    /**
-     * 创建时间
-     */
-    private String gmtCreate;
-
-    /**
-     * 修改时间
-     */
-    private String gmtModified;
+    private String title = "";
+    private String user_id;
+    private Boolean is_anonymous = false;
+    private Integer views = 0;
+    private Integer answers = 0;
+    private Integer likes = 0;
+    private boolean valid = true;
+    private String gmt_create;
+    private String gmt_modified;
 }

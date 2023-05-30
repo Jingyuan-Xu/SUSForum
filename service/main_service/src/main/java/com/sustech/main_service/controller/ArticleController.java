@@ -33,6 +33,11 @@ public class ArticleController {
     @ApiOperation("保存文章")
     public Result saveArticle(String id, String title, String content, String user_id, String cover) {
         Article article = new Article();
+        id=id==null?"":id;
+        title=title==null?"":title;
+        content = content==null?"":content;
+        user_id=user_id==null?"":user_id;
+        cover = cover==null?"":cover;
         article.setCover(cover);
         article.setTitle(title);
         article.setId(id);
@@ -101,7 +106,8 @@ public class ArticleController {
 
     @ApiOperation("评论文章")
     @PostMapping("comment")
-    public Result comment(String info, String articleId, String userId, String path) {
+    public Result comment(String info, String articleId, String userId) {
+        String path = ".";
         return articleService.addComment(userId, articleId, info, path);
     }
 
