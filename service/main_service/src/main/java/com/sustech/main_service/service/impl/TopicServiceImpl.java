@@ -1,6 +1,5 @@
 package com.sustech.main_service.service.impl;
 
-import com.alibaba.druid.sql.PagerUtils;
 import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
@@ -13,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author Lynchrocket
@@ -29,6 +29,8 @@ public class TopicServiceImpl implements TopicService {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         topic.setGmt_create(currentTime);
         topic.setGmt_modified(currentTime);
+        int num = new Random().nextInt(Integer.MAX_VALUE);
+        topic.setId(num+"");
         return topicMapper.addTopic(topic) > 0;
     }
 

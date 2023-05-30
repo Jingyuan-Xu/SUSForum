@@ -2,6 +2,7 @@ package com.sustech.main_service.controller;
 
 import com.sustech.global.entity.Result;
 import com.sustech.main_service.entity.Article;
+import com.sustech.main_service.entity.ArticleComment;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.service.ArticleService;
 import com.sustech.main_service.service.UserService;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/article")
@@ -70,11 +70,6 @@ public class ArticleController {
             article.setUser_id(author.getNick_name());
             articleVoPage.add(article);
         }
-
-//        List<Article> articleVoPage = articlePage.stream().peek(x->{
-//            User author = userService.getByUserId(x.getUserId());
-//            x.setUserId(author.getNick_name());
-//        }).collect(Collectors.toList());
         Map<String, Object> map = new HashMap<>();
         map.put("data", articleVoPage);
         return Result.ok().code(200).data(map);
@@ -108,6 +103,16 @@ public class ArticleController {
     public Result comment(String info, String articleId, String userId) {
         String path = ".";
         return articleService.addComment(userId, articleId, info, path);
+    }
+
+    @ApiOperation("获取文章评论")
+    @PostMapping("getArticleComments")
+    public Result getArticleComments(String id) {
+        List<ArticleComment> articleCommentList = articleService.getArticleComments(id);
+        if (articleCommentList == null) {
+            return Result.error().message("Fail to get article comments");
+        }
+        return Result.ok().data(Map.of("articleComments", articleCommentList));
     }
 
     @ApiOperation("点赞文章")
