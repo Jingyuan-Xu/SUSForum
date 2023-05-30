@@ -14,8 +14,6 @@ import java.util.List;
 public interface TopicService {
     boolean addTopic(Topic topic);
 
-
-
     List<Topic> getUserTopics(String userId);
 
     Result getAllTopic();

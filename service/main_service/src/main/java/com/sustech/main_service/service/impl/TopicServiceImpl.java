@@ -2,11 +2,9 @@ package com.sustech.main_service.service.impl;
 
 import com.alibaba.druid.sql.PagerUtils;
 import com.sustech.global.entity.Result;
-import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.Topic;
 import com.sustech.main_service.mapper.TopicMapper;
 import com.sustech.main_service.service.TopicService;
-import com.sustech.main_service.utils.SnowFlake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +29,6 @@ public class TopicServiceImpl implements TopicService {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         topic.setGmt_create(currentTime);
         topic.setGmt_modified(currentTime);
-        topic.setId(SnowFlake.nextId());
         return topicMapper.addTopic(topic) > 0;
     }
 

@@ -5,7 +5,6 @@ import com.sustech.main_service.entity.Article;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.service.ArticleService;
 import com.sustech.main_service.service.UserService;
-import com.sustech.main_service.utils.SnowFlake;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
