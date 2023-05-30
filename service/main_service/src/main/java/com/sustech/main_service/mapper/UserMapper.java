@@ -18,8 +18,8 @@ public interface UserMapper {
     @Insert("INSERT INTO t_user VALUES(#{id}, #{username}, #{password}, #{nickName}, #{email}, #{avatar}, #{background}, #{role}, #{gmtCreate}, #{gmtModified})")
     int addUser(User user);
 
-    @Update("UPDATE t_user SET username=#{username},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} where id=#{id}")
-    int revise(String id, String username, String password, String nick_name, String email, String avatar, String background);
+    @Update("UPDATE t_user SET username=#{username},password=#{password},nick_name=#{nick_name},email=#{email},avatar=#{avatar},background=#{background} WHERE id=#{id}")
+    int revise(User user);
 
     @Select("SELECT * FROM t_user WHERE username=#{username}")
     User getByUsername(String username);

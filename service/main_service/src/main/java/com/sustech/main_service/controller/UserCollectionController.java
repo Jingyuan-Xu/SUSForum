@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-@Api("用户收藏模块")
+@Api(tags = "用户收藏模块")
 @RestController
 @RequestMapping("/userCollection")
 @CrossOrigin

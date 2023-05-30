@@ -13,11 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Api("用户个人中心模块")
+@Api(tags = "用户个人中心模块")
 @RestController
 @RequestMapping("/userCenter")
 @CrossOrigin
-public class UserController {
+public class UserCenterController {
 
     @Autowired
     private UserService userService;
@@ -51,7 +51,7 @@ public class UserController {
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
-        userService.reviseInfo(user.getId(), user.getUsername(), user.getPassword(), user.getNick_name(), user.getEmail(), user.getAvatar(), user.getBackground());
+        userService.reviseInfo(user);
         return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
     }
 

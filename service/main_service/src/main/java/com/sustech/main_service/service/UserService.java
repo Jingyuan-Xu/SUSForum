@@ -18,7 +18,5 @@ public interface UserService {
 
     User getByUsername(String username);
 
-    boolean reviseInfo(String id, String username, String password, String nick_name, String email, String avatar, String background);
-
-
+    boolean reviseInfo(User user);
 }
