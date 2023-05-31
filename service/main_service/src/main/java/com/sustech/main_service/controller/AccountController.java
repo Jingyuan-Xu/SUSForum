@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -24,7 +25,9 @@ public class AccountController {
     public Result login(String username, String password) {
         User user = userService.getByUsername(username);
         if (user != null && password.equals(user.getPassword())) {
-            return Result.ok().code(200).data(Map.of("user", user));
+            Map<String,Object> map = new HashMap<>();
+            map.put("user",user);
+            return Result.ok().code(200).data(map);
         }
         return Result.error().message("No such user or invalid username or password");
     }
@@ -47,7 +50,9 @@ public class AccountController {
             return Result.error().code(6000).message("No password.");
         }
         if (userService.addUser(user)) {
-            return Result.ok().code(200).message("Success to register.").data(Map.of("user", user));
+            Map<String,Object> map = new HashMap<>();
+            map.put("user",user);
+            return Result.ok().code(200).message("Success to register.").data(map);
         }
         return Result.error().message("Fail to add user");
     }

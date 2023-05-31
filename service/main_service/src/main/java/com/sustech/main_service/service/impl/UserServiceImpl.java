@@ -1,10 +1,12 @@
 package com.sustech.main_service.service.impl;
 
+import com.sustech.global.utils.DateUtils;
 import com.sustech.main_service.entity.User;
 import com.sustech.main_service.mapper.UserMapper;
 import com.sustech.main_service.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.unit.DataUnit;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean addUser(User user) {
-        String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
+        String currentTime = DateUtils.getCurrDate();
         user.setGmt_create(currentTime);
         user.setGmt_modified(currentTime);
         return userMapper.addUser(user) > 0;

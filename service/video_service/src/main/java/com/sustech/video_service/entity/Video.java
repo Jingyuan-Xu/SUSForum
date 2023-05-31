@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Video {
+    String id;
     String url;
     String title;
     String brief;
@@ -11,4 +12,5 @@ public class Video {
     String cover;
     String gmt_create;
     String gmt_modified;
+    String type;
 }
