@@ -21,7 +21,9 @@ public class UserCollectionServiceImpl implements UserCollectionService {
         String currentTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
         userCollection.setGmt_create(currentTime);
         userCollection.setGmt_modified(currentTime);
-        return userCollectionMapper.addUserCollection(userCollection) > 0;
+        int tmp = userCollectionMapper.addUserCollection(userCollection);
+        System.out.println(tmp);
+        return tmp > 0;
     }
 
     @Override

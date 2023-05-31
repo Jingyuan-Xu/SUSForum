@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserCollectionMapper {
     @Select("SELECT * FROM t_collection WHERE id=#{id}")
     UserCollection getById(int id);
-    @Update("UPDATE t_collection SET status=0 WHERE id=#{id}")
+    @Update("UPDATE t_collection SET valid=0 WHERE id=#{id}")
     int deleteUserCollection(int id);
     @Insert("INSERT INTO t_collection(user_id,topic_id,article_id,gmt_create,gmt_modified) VALUES (#{user_id},#{topic_d},#{article_id},#{gmt_create},#{gmt_modified})")
     int addUserCollection(UserCollection userCollection);

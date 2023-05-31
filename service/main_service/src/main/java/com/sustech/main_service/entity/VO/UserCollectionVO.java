@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserCollectionVO {
-    Long id;
+    Integer id;
     String userId;
     String topicId;
     String topicTitle;

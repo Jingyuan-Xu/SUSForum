@@ -30,7 +30,6 @@
         <postgresql.version>42.5.4</postgresql.version>
         <mybatis.version>2.1.3</mybatis.version>
         <nacos.version>2021.1</nacos.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
     </properties>
 
 <!--    如果子模块需要使用，请再次在子模块中导入依赖，这里的依赖无法继承，子模块导入时请不要加version-->
@@ -91,16 +90,20 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.baomidou</groupId>-->
-<!--                <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--                <version>${mybatis-plus.version}</version>-->
-<!--            </dependency>-->
-
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
                 <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${springboot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.40</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

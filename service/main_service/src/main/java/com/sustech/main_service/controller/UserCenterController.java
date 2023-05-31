@@ -36,28 +36,28 @@ public class UserCenterController {
 
     @ApiOperation(value = "获取用户所有数据")
     @GetMapping("getUserData")
-    public Result getUserData(String userId) {
+    public Result getUserData(@RequestParam String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
         }
-        return Result.ok().code(200).data(Map.of("data", user));
+        return Result.ok().code(200).data(Map.of("user", user));
     }
 
     @ApiOperation(value = "修改用户数据")
     @PostMapping("editUserData")
-    public Result editUserData(User user) {
+    public Result editUserData(@RequestBody User user) {
         User dbUser = userService.getByUserId(user.getId());
         if (dbUser == null) {
             return Result.error().message("No such user");
         }
         userService.reviseInfo(user);
-        return Result.ok().code(200).data(Map.of("data", userService.getByUserId(user.getId())));
+        return Result.ok().code(200).data(Map.of("user", userService.getByUserId(user.getId())));
     }
 
     @ApiOperation(value = "返回用户文章")
     @GetMapping("getUserArticles")
-    public Result getUserArticles(String userId) {
+    public Result getUserArticles(@RequestParam String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -66,12 +66,12 @@ public class UserCenterController {
         if (articleList == null) {
             return Result.error().message("No such user articles");
         }
-        return Result.ok().code(200).data(Map.of("data", articleList));
+        return Result.ok().code(200).data(Map.of("articles", articleList));
     }
 
     @ApiOperation(value = "返回用户话题")
     @GetMapping("getUserTopics")
-    public Result getUserTopics(String userId) {
+    public Result getUserTopics(@RequestParam String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -80,12 +80,12 @@ public class UserCenterController {
         if (topicList == null) {
             return Result.error().message("No such user topics");
         }
-        return Result.ok().code(200).data(Map.of("data", topicList));
+        return Result.ok().code(200).data(Map.of("topics", topicList));
     }
 
     @ApiOperation(value = "返回用户评论")
     @GetMapping("getUserComments")
-    public Result getUserComments(String userId) {
+    public Result getUserComments(@RequestParam String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -94,12 +94,12 @@ public class UserCenterController {
         if (commentList == null) {
             return Result.error().message("No such user comments");
         }
-        return Result.ok().code(200).data(Map.of("data", commentList));
+        return Result.ok().code(200).data(Map.of("comments", commentList));
     }
 
     @ApiOperation(value = "返回用户收藏")
     @GetMapping("getUserCollections")
-    public Result getUserCollections(String userId) {
+    public Result getUserCollections(@RequestParam String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -110,7 +110,7 @@ public class UserCenterController {
         }
         List<UserCollectionVO> userCollectionVOList = new ArrayList<>();
         for (UserCollection x : userCollectionList) {
-            if (x.getStatus() == 0) continue;
+            if (x.getValid() == 0) continue;
             Topic topic = (Topic) topicService.getById(x.getTopic_id()).getData().get("topic");
             String topicTitle = (topic == null) ? "" : topic.getTitle();
             Article article = articleService.getByArticleId(x.getArticle_id());
@@ -125,6 +125,6 @@ public class UserCenterController {
             userCollectionVOList.add(u);
         }
 
-        return Result.ok().code(200).data(Map.of("data", userCollectionVOList));
+        return Result.ok().code(200).data(Map.of("collections", userCollectionVOList));
     }
 }

@@ -22,22 +22,24 @@ public class TopicController {
 
     @ApiOperation(value = "增加话题")
     @PostMapping("save")
-    public Result addTopic(String title,boolean is_Anonymous,String user_id){
+    public Result addTopic(String title, boolean is_Anonymous, String user_id) {
         Topic topic = new Topic();
         topic.setTitle(title);
         topic.setIs_anonymous(is_Anonymous);
         topic.setUser_id(user_id);
-        if (topicService.addTopic(topic)) return Result.ok().code(200);
+        if (topicService.addTopic(topic)) {
+            return Result.ok().code(200);
+        }
         return Result.error();
     }
 
     @GetMapping("all")
-    public Result getAllTopic(){
+    public Result getAllTopic() {
         return topicService.getAllTopic();
     }
 
     @GetMapping("getById")
-    public Result getTopicById(String id){
+    public Result getTopicById(String id) {
         return topicService.getById(id);
     }
 

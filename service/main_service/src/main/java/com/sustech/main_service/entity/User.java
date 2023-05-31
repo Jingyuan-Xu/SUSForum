@@ -7,7 +7,7 @@ import lombok.Data;
  * @TableName t_user
  */
 @Data
-public class User{
+public class User {
     /**
      * 主键ID
      */
