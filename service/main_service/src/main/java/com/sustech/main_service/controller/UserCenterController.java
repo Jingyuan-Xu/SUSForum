@@ -110,7 +110,7 @@ public class UserCenterController {
         }
         List<UserCollectionVO> userCollectionVOList = new ArrayList<>();
         for (UserCollection x : userCollectionList) {
-            if (x.getStatus() == 0) continue;
+            if (x.getValid() == 0) continue;
             Topic topic = (Topic) topicService.getById(x.getTopic_id()).getData().get("topic");
             String topicTitle = (topic == null) ? "" : topic.getTitle();
             Article article = articleService.getByArticleId(x.getArticle_id());

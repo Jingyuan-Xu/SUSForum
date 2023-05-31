@@ -32,28 +32,23 @@ public class ArticleController {
     @ApiOperation("保存文章")
     public Result saveArticle(String id, String title, String content, String user_id, String cover) {
         Article article = new Article();
-        id=id==null?"":id;
-        title=title==null?"":title;
-        content = content==null?"":content;
-        user_id=user_id==null?"":user_id;
-        cover = cover==null?"":cover;
-        article.setCover(cover);
-        article.setTitle(title);
-        article.setId(id);
-        article.setContent(content);
-        article.setUser_id(user_id);
+        article.setCover((cover == null) ? "" : cover);
+        article.setTitle((title == null) ? "" : title);
+        article.setId((id == null) ? "" : id);
+        article.setContent((content == null) ? "" : content);
+        article.setUser_id((user_id == null) ? "" : user_id);
         if (articleService.saveArticle(article)) {
             return Result.ok().code(200);
         }
-        return Result.error().code(5000).message("文章已存在");
+        return Result.error().code(5000).message("Such article has existed");
     }
 
     @ApiOperation("查询文章")
     @GetMapping("getById")
     public Result getArticle(String id) {
-        Article article =articleService.getByArticleId(id);
-        Map<String,Object> data = new HashMap<>();
-        data.put("article",article);
+        Article article = articleService.getByArticleId(id);
+        Map<String, Object> data = new HashMap<>();
+        data.put("article", article);
         return Result.ok().code(200).data(data);
     }
 
@@ -88,11 +83,6 @@ public class ArticleController {
             article.setUser_id(author.getNick_name());
             articleVoPage.add(article);
         }
-
-//        List<Article> articleVoPage = articlePage.stream().peek(x->{
-//            User author = userService.getByUserId(x.getUserId());
-//            x.setUserId(author.getNick_name());
-//        }).collect(Collectors.toList());
         Map<String, Object> map = new HashMap<>();
         map.put("data", articleVoPage);
         return Result.ok().code(200).data(map);
