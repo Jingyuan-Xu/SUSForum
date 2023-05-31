@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -18,8 +19,9 @@ public class VideoServiceImpl implements VideoService {
     VideoMapper mapper;
 
     @Override
-    public Result upload(String file, String user_id, String title, String info) {
-        mapper.addVideo(file,title,info,user_id, DateUtils.getCurrDate(),DateUtils.getCurrDate());
+    public Result upload(String file, String user_id, String title, String info,String cover,String type) {
+        String id = String.valueOf(new Random().nextInt(Integer.MAX_VALUE));
+        mapper.addVideo(id,file,title,info,user_id, DateUtils.getCurrDate(),DateUtils.getCurrDate(),cover,type);
         return Result.ok().code(200);
     }
 
@@ -30,8 +32,8 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-    public Result getVideo(String url) {
-        Video video = mapper.getVideoByURL(url);
+    public Result getVideo(String id) {
+        Video video = mapper.getVideoById(id);
         Map<String, Object> map = new HashMap<>();
         map.put("video",video);
         return Result.ok().code(200).data(map);

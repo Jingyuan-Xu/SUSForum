@@ -18,14 +18,14 @@ public class VideoController {
 
     @PostMapping("upload")
     @ApiOperation("上传视频")
-    public Result upload(String file,String user_id,String title,String info){
-        return service.upload(file,user_id,title,info);
+    public Result upload(String file,String user_id,String title,String info,String cover,String type){
+        return service.upload(file,user_id,title,info,cover,type);
     }
 
     @GetMapping("getVideo")
     @ApiOperation("获取视频信息")
-    public Result getByURL(String url){
-        return service.getVideo(url);
+    public Result getById(String id){
+        return service.getVideo(id);
     }
 
     @PostMapping("delete")
