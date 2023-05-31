@@ -36,7 +36,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "获取用户所有数据")
     @GetMapping("getUserData")
-    public Result getUserData(@RequestParam String userId) {
+    public Result getUserData(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -46,7 +46,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "修改用户数据")
     @PostMapping("editUserData")
-    public Result editUserData(@RequestBody User user) {
+    public Result editUserData(User user) {
         User dbUser = userService.getByUserId(user.getId());
         if (dbUser == null) {
             return Result.error().message("No such user");
@@ -57,7 +57,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "返回用户文章")
     @GetMapping("getUserArticles")
-    public Result getUserArticles(@RequestParam String userId) {
+    public Result getUserArticles(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -71,7 +71,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "返回用户话题")
     @GetMapping("getUserTopics")
-    public Result getUserTopics(@RequestParam String userId) {
+    public Result getUserTopics(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -85,7 +85,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "返回用户评论")
     @GetMapping("getUserComments")
-    public Result getUserComments(@RequestParam String userId) {
+    public Result getUserComments(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");
@@ -99,7 +99,7 @@ public class UserCenterController {
 
     @ApiOperation(value = "返回用户收藏")
     @GetMapping("getUserCollections")
-    public Result getUserCollections(@RequestParam String userId) {
+    public Result getUserCollections(String userId) {
         User user = userService.getByUserId(userId);
         if (user == null) {
             return Result.error().message("No such user");

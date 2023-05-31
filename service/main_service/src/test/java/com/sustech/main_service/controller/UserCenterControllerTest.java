@@ -15,8 +15,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,12 +59,11 @@ class UserCenterControllerTest {
     @Transactional
     @Rollback
     void editUserData() throws Exception {
-        User user = new User();
-        user.setId("8348635108338113213");
-        user.setNick_name("nick name for test");
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.put("id", Collections.singletonList("8348635108338113213"));
+        params.put("nick_name", Collections.singletonList("nick name for test"));
         mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/editUserData")
-                        .content(JSONObject.toJSONString(user))
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.data.user").isNotEmpty())
@@ -69,10 +72,9 @@ class UserCenterControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
 
-        user.setId("");
+        params.put("id", Collections.singletonList(""));
         mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/editUserData")
-                        .content(JSONObject.toJSONString(user))
-                        .contentType(MediaType.APPLICATION_JSON)
+                        .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user"))
@@ -82,7 +84,23 @@ class UserCenterControllerTest {
 
     @Test
     void getUserArticles() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/getUserArticles")
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserArticles")
+                        .param("userId", "")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserArticles")
+                        .param("userId", "1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user articles"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserArticles")
                         .param("userId", "8348635108338113213")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

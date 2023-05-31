@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Random;
 
 @Api(tags = "用户账户测试模块")
 @RestController
@@ -32,6 +33,7 @@ public class AccountController {
     @PostMapping("register")
     public Result register(String username, String password, String nick_name, String email) {
         User user = new User();
+        user.setId(String.valueOf(new Random().nextInt(Integer.MAX_VALUE)));
         user.setUsername(username);
         user.setPassword(password);
         user.setNick_name(nick_name);

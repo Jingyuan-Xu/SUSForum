@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -38,7 +39,7 @@ class AccountControllerTest {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("username", Collections.singletonList("for_test"));
         params.put("password", Collections.singletonList("123456"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/login")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -47,11 +48,11 @@ class AccountControllerTest {
                 .andReturn();
 
         params.put("username", Collections.singletonList("no_such_user"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/login")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.message").value("No such user or invalid username or password"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user or invalid username or password"))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
@@ -60,34 +61,42 @@ class AccountControllerTest {
     @Transactional
     @Rollback
     void register() throws Exception {
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("username", Collections.singletonList("for_test"));
-        params.put("nick_name", Collections.singletonList("nick_test"));
-        params.put("email", Collections.singletonList("123456789@sus.com"));
+        MultiValueMap<String, String> params1 = new LinkedMultiValueMap<>();
+        params1.put("username", Collections.singletonList("for_test_no_password"));
+        params1.put("password", Collections.singletonList("123456"));
+        params1.put("nick_name", Collections.singletonList("nick_test"));
+        params1.put("email", Collections.singletonList("123456789@sus.com"));
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/register")
-                        .params(params)
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/register")
+                        .params(params1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.message").value("No password."))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Success to register."))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
 
-        params.put("password", Collections.singletonList("123456"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/register")
-                        .params(params)
+        MultiValueMap<String, String> params2 = new LinkedMultiValueMap<>();
+        params2.put("username", Collections.singletonList("for_test"));
+        params2.put("password", Collections.singletonList("123456"));
+        params2.put("nick_name", Collections.singletonList("nick_test"));
+        params2.put("email", Collections.singletonList("123456789@sus.com"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/register")
+                        .params(params2)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.message").value("Success to register."))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.user").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("User exists, please try again."))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/register")
-                        .params(params)
+        MultiValueMap<String, String> params3 = new LinkedMultiValueMap<>();
+        params3.put("username", Collections.singletonList("for_test_new"));
+        params3.put("nick_name", Collections.singletonList("nick_test"));
+        params3.put("email", Collections.singletonList("123456789@sus.com"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/register")
+                        .params(params3)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.message").value("User exists, please try again."))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No password."))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
@@ -104,7 +113,7 @@ class AccountControllerTest {
         params.put("email", Collections.singletonList("123456789@sus.com"));
         params.put("avatar", Collections.singletonList("ava"));
         params.put("background", Collections.singletonList("bg"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/account/revise")
+        mockMvc.perform(MockMvcRequestBuilders.post("/account/revise")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
