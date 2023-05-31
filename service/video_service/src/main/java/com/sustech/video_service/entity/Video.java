@@ -8,6 +8,7 @@ public class Video {
     String title;
     String brief;
     String uploader;
+    String cover;
     String gmt_create;
     String gmt_modified;
 }
