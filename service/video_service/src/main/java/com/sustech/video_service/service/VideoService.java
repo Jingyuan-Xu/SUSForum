@@ -11,4 +11,7 @@ public interface VideoService {
 
     Result getVideo(String id);
 
+    Result getAll();
+
+    Result getVideoByUserId(String user_id);
 }

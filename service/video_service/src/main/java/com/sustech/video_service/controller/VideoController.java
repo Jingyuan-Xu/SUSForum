@@ -4,14 +4,12 @@ import com.sustech.video_service.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("video")
 @Api(tags = "video 模块")
+@CrossOrigin
 public class VideoController {
     @Autowired
     VideoService service;
@@ -28,9 +26,19 @@ public class VideoController {
         return service.getVideo(id);
     }
 
+    @GetMapping("all")
+    public Result getAll(){
+        return service.getAll();
+    }
+
     @PostMapping("delete")
     @ApiOperation("删除视频")
     public Result delete(String url){
         return service.delete(url);
+    }
+
+    @GetMapping("getVideoByUserId")
+    public Result getVideoByUserId(String user_id){
+        return service.getVideoByUserId(user_id);
     }
 }

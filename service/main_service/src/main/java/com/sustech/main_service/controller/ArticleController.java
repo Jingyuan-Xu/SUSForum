@@ -62,10 +62,12 @@ public class ArticleController {
 
         for (Article article : articlePage) {
             User author = userService.getByUserId(article.getUser_id());
-            article.setUser_id(author.getNick_name());
+            article.setUser_id(author.getId());
             articleVoPage.add(article);
         }
-        return Result.ok().code(200).data(Map.of("articles", articleVoPage));
+        Map<String,Object> map = new HashMap<>();
+        map.put("articles",articleVoPage);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation("评论文章")
@@ -82,7 +84,9 @@ public class ArticleController {
         if (articleCommentList == null) {
             return Result.error().message("Fail to get article comments");
         }
-        return Result.ok().data(Map.of("articleComments", articleCommentList));
+        Map<String,Object> map = new HashMap<>();
+        map.put("articleComments", articleCommentList);
+        return Result.ok().data(map);
     }
 
     @ApiOperation("点赞文章")

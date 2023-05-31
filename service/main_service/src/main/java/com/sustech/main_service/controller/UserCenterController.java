@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,9 @@ public class UserCenterController {
         if (user == null) {
             return Result.error().message("No such user");
         }
-        return Result.ok().code(200).data(Map.of("user", user));
+        Map<String,Object> map = new HashMap<>();
+        map.put("user",user);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation(value = "修改用户数据")
@@ -52,7 +55,9 @@ public class UserCenterController {
             return Result.error().message("No such user");
         }
         userService.reviseInfo(user);
-        return Result.ok().code(200).data(Map.of("user", userService.getByUserId(user.getId())));
+        Map<String,Object> map = new HashMap<>();
+        map.put("user",user);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation(value = "返回用户文章")
@@ -66,7 +71,9 @@ public class UserCenterController {
         if (articleList == null || articleList.size() == 0) {
             return Result.error().message("No such user articles");
         }
-        return Result.ok().code(200).data(Map.of("articles", articleList));
+        Map<String,Object> map = new HashMap<>();
+        map.put("articles",articleList);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation(value = "返回用户话题")
@@ -80,7 +87,9 @@ public class UserCenterController {
         if (topicList == null || topicList.size() == 0) {
             return Result.error().message("No such user topics");
         }
-        return Result.ok().code(200).data(Map.of("topics", topicList));
+        Map<String,Object> map = new HashMap<>();
+        map.put("topics",topicList);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation(value = "返回用户评论")
@@ -94,7 +103,9 @@ public class UserCenterController {
         if (commentList == null || commentList.size() == 0) {
             return Result.error().message("No such user comments");
         }
-        return Result.ok().code(200).data(Map.of("comments", commentList));
+        Map<String,Object> map = new HashMap<>();
+        map.put("comments", commentList);
+        return Result.ok().code(200).data(map);
     }
 
     @ApiOperation(value = "返回用户收藏")
@@ -124,7 +135,8 @@ public class UserCenterController {
             u.setArticleTitle(articleTitle);
             userCollectionVOList.add(u);
         }
-
-        return Result.ok().code(200).data(Map.of("collections", userCollectionVOList));
+        Map<String,Object> map = new HashMap<>();
+        map.put("collections", userCollectionVOList);
+        return Result.ok().code(200).data(map);
     }
 }

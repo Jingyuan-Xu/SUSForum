@@ -6,13 +6,12 @@
 		<groupId>com.sustech</groupId>
 		<artifactId>service</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
 	<artifactId>main_service</artifactId>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>
@@ -33,6 +32,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

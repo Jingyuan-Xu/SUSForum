@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Api(tags = "用户收藏模块")
@@ -29,7 +30,9 @@ public class UserCollectionController {
             userCollection.setTopic_id(articleOrTopicId);
         }
         if (userCollectionService.addUserCollection(userCollection)) {
-            return Result.ok().code(200).message("Success to add collection.").data(Map.of("collection", userCollection));
+            Map<String,Object> map = new HashMap<>();
+            map.put("collection", userCollection);
+            return Result.ok().code(200).message("Success to add collection.").data(map);
         }
         System.out.println("outer");
         return Result.error().message("Fail to add collection");
