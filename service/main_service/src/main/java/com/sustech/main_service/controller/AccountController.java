@@ -19,7 +19,6 @@ import java.util.Random;
 public class AccountController {
     @Autowired
     private UserService userService;
-
     @ApiOperation(value = "登录接口")
     @PostMapping("login")
     public Result login(String username, String password) {

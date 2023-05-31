@@ -37,8 +37,8 @@ class AccountControllerTest {
     @Test
     void login() throws Exception {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.put("username", Collections.singletonList("for_test"));
-        params.put("password", Collections.singletonList("123456"));
+        params.put("username", Collections.singletonList("test1"));
+        params.put("password", Collections.singletonList("1"));
         mockMvc.perform(MockMvcRequestBuilders.post("/account/login")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
@@ -76,7 +76,7 @@ class AccountControllerTest {
                 .andReturn();
 
         MultiValueMap<String, String> params2 = new LinkedMultiValueMap<>();
-        params2.put("username", Collections.singletonList("for_test"));
+        params2.put("username", Collections.singletonList("test1"));
         params2.put("password", Collections.singletonList("123456"));
         params2.put("nick_name", Collections.singletonList("nick_test"));
         params2.put("email", Collections.singletonList("123456789@sus.com"));
@@ -107,7 +107,7 @@ class AccountControllerTest {
     void reviseInfo() throws Exception {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("id", Collections.singletonList("8348635108338113213"));
-        params.put("username", Collections.singletonList("for_test"));
+        params.put("username", Collections.singletonList("test1"));
         params.put("password", Collections.singletonList("123456"));
         params.put("nick_name", Collections.singletonList("nick_test"));
         params.put("email", Collections.singletonList("123456789@sus.com"));
