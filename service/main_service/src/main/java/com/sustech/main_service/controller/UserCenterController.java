@@ -63,7 +63,7 @@ public class UserCenterController {
             return Result.error().message("No such user");
         }
         List<Article> articleList = articleService.getUserArticles(userId);
-        if (articleList == null) {
+        if (articleList == null || articleList.size() == 0) {
             return Result.error().message("No such user articles");
         }
         return Result.ok().code(200).data(Map.of("articles", articleList));
@@ -77,7 +77,7 @@ public class UserCenterController {
             return Result.error().message("No such user");
         }
         List<Topic> topicList = topicService.getUserTopics(userId);
-        if (topicList == null) {
+        if (topicList == null || topicList.size() == 0) {
             return Result.error().message("No such user topics");
         }
         return Result.ok().code(200).data(Map.of("topics", topicList));
@@ -91,7 +91,7 @@ public class UserCenterController {
             return Result.error().message("No such user");
         }
         List<Comment> commentList = commentService.getUserComments(userId);
-        if (commentList == null) {
+        if (commentList == null || commentList.size() == 0) {
             return Result.error().message("No such user comments");
         }
         return Result.ok().code(200).data(Map.of("comments", commentList));
@@ -105,7 +105,7 @@ public class UserCenterController {
             return Result.error().message("No such user");
         }
         List<UserCollection> userCollectionList = userCollectionService.getUserCollections(userId);
-        if (userCollectionList == null) {
+        if (userCollectionList == null || userCollectionList.size() == 0) {
             return Result.error().message("No such user collections");
         }
         List<UserCollectionVO> userCollectionVOList = new ArrayList<>();

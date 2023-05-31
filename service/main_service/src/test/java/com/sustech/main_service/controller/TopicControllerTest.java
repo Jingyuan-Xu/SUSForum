@@ -41,7 +41,7 @@ class TopicControllerTest {
         params.put("title", Collections.singletonList("for_test"));
         params.put("is_Anonymous", Collections.singletonList("true"));
         params.put("user_id", Collections.singletonList("8348635108338113213"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/topic/save")
+        mockMvc.perform(MockMvcRequestBuilders.post("/topic/save")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

@@ -52,24 +52,6 @@ public class ArticleController {
         return Result.ok().code(200).data(data);
     }
 
-//    @ApiOperation("查询文章分页列表")
-//    @PostMapping("getPage")
-//    public Result getArticlePage(int currentPage, int pageSize) {
-//        List<Article> articlePage = articleService.getArticlePage(currentPage, pageSize);
-//        if (articlePage == null || articlePage.size() == 0)
-//            return Result.error().message("No article");
-//        List<Article> articleVoPage = new ArrayList<>();
-//
-//        for (Article article : articlePage) {
-//            User author = userService.getByUserId(article.getUser_id());
-//            article.setUser_id(author.getNick_name());
-//            articleVoPage.add(article);
-//        }
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("data", articleVoPage);
-//        return Result.ok().code(200).data(map);
-//    }
-
     @ApiOperation("查询文章列表")
     @GetMapping("getAllArticles")
     public Result getAllArticles() {

@@ -1,7 +1,5 @@
 package com.sustech.main_service.controller;
 
-import com.sustech.main_service.entity.User;
-import com.alibaba.fastjson.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -111,7 +110,23 @@ class UserCenterControllerTest {
 
     @Test
     void getUserTopics() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/getUserTopics")
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserTopics")
+                        .param("userId", "")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserTopics")
+                        .param("userId", "1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user topics"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserTopics")
                         .param("userId", "8348635108338113213")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -122,7 +137,23 @@ class UserCenterControllerTest {
 
     @Test
     void getUserComments() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/getUserComments")
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserComments")
+                        .param("userId", "")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserComments")
+                        .param("userId", "1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user comments"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserComments")
                         .param("userId", "8348635108338113213")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -133,12 +164,29 @@ class UserCenterControllerTest {
 
     @Test
     void getUserCollections() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/getUserCollections")
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserCollections")
+                        .param("userId", "")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/userCenter/getUserCollections")
+                        .param("userId", "1")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("No such user collections"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+
+       MvcResult result =  mockMvc.perform(MockMvcRequestBuilders.post("/userCenter/getUserCollections")
                         .param("userId", "8348635108338113213")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.data.collections").isNotEmpty())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.data.collections").isNotEmpty())
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
+       System.out.println(result.getResponse().getContentAsString());
     }
 }

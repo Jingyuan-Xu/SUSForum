@@ -43,7 +43,7 @@ class ArticleControllerTest {
         params.put("content", Collections.singletonList("123456"));
         params.put("user_id", Collections.singletonList("8348635108338113213"));
         params.put("cover", Collections.singletonList("123456"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/article/save")
+        mockMvc.perform(MockMvcRequestBuilders.post("/article/save")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -80,7 +80,7 @@ class ArticleControllerTest {
         params.put("info", Collections.singletonList("for_test"));
         params.put("articleId", Collections.singletonList("123456"));
         params.put("userId", Collections.singletonList("8348635108338113213"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/article/comment")
+        mockMvc.perform(MockMvcRequestBuilders.post("/article/comment")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -90,7 +90,7 @@ class ArticleControllerTest {
 
     @Test
     void getArticleComments() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/article/getArticleComments")
+        mockMvc.perform(MockMvcRequestBuilders.post("/article/getArticleComments")
                         .param("id", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -103,7 +103,7 @@ class ArticleControllerTest {
     @Transactional
     @Rollback
     void likeArticle() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/article/likeArticle")
+        mockMvc.perform(MockMvcRequestBuilders.post("/article/likeArticle")
                         .param("id", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -116,7 +116,7 @@ class ArticleControllerTest {
     @Transactional
     @Rollback
     void unlikeArticle() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/article/unlikeArticle")
+        mockMvc.perform(MockMvcRequestBuilders.post("/article/unlikeArticle")
                         .param("id", "1")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

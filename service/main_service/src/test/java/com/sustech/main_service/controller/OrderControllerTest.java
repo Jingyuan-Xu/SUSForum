@@ -44,7 +44,7 @@ class OrderControllerTest {
         params.put("is_buyer", Collections.singletonList("true"));
         params.put("contact", Collections.singletonList("123456"));
         params.put("price", Collections.singletonList("123456"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/order/add")
+        mockMvc.perform(MockMvcRequestBuilders.post("/order/add")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -69,7 +69,7 @@ class OrderControllerTest {
         params.put("id", Collections.singletonList("1"));
         params.put("user_id", Collections.singletonList("8348635108338113213"));
         params.put("contact", Collections.singletonList("for_test"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/order/buy")
+        mockMvc.perform(MockMvcRequestBuilders.post("/order/buy")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -85,7 +85,7 @@ class OrderControllerTest {
         params.put("id", Collections.singletonList("1"));
         params.put("user_id", Collections.singletonList("8348635108338113213"));
         params.put("contact", Collections.singletonList("for_test"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/order/sell")
+        mockMvc.perform(MockMvcRequestBuilders.post("/order/sell")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -99,7 +99,7 @@ class OrderControllerTest {
     void deleteById() throws Exception {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.put("id", Collections.singletonList("1"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/order/delete")
+        mockMvc.perform(MockMvcRequestBuilders.post("/order/delete")
                         .params(params)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
